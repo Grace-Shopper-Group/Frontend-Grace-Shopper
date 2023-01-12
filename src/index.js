@@ -1,8 +1,9 @@
 import React, {useState, useEffect} from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Route, Switch, Link} from 'react-router-dom';
-import { Login, Register, Logout, Admindash, Home} from './Components'
-import {fetchProducts} from ('../api/Requests.js')
+//import { Login, Register, Logout, Admindash, Home} from './Components'
+import { Login, Register, Home} from './Components';
+import {fetchProducts} from './api/Requests.js';
 
 
 const App = () => {
@@ -11,6 +12,7 @@ const App = () => {
         window.localStorage.getItem("token") || null
       );
       const [allProducts, setAllProducts] = useState([]);
+      const [user, setUser] = useState([]);
       useEffect(()=> {
           const getAllProducts = async () => {
             try{
@@ -44,9 +46,9 @@ const App = () => {
           <Route path = "/" exact><Home></Home></Route>
           <Route path = "/login"><Login setToken = {setToken}></Login></Route>
           <Route path = "/register"><Register setToken = {setToken}></Register></Route>
-          <Route path = "/register"><Logout></Logout></Route>
-          <Route path = "/admindash"> <Admindash token = {token}></Admindash></Route>
-          <Route path = "/category"> <Category token = {token}></Category></Route>
+          {/* <Route path = "/register"><Logout></Logout></Route> */}
+          {/* <Route path = "/admindash"> <Admindash token = {token}></Admindash></Route>
+          <Route path = "/category"> <Category token = {token}></Category></Route> */}
          
           
   </div>
