@@ -40,6 +40,10 @@ const Home = (props) => {
    <div id="homeimagediv">
    <img id="homeimage" src={`${process.env.PUBLIC_URL}/images/homepic2.jpg`} />
    </div>
+
+   <div id="home-footer-background1"></div>
+   <div id="home-footer-background2"></div>
+   <div id="home-footer-background3"></div>
  </>);
     
     

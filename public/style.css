@@ -38,6 +38,7 @@ justify-content: center;
 #homeimage{
     height: 200px;
     width: 300px;
+    border-radius: 10px;
     
 }
 
@@ -72,4 +73,51 @@ align-items: center;
   .home-category-title:hover {
     transform: scale(1.1);
     transition: transform 0.2s;
+  }
+
+  #home-footer-background1{
+    position: fixed;
+    height: 50px;
+    width: 100%;
+    left: 0;
+    background-color: lightsalmon;
+    z-index: -1;
+    bottom: 0;
+    opacity: .9;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 5%);
+    border-radius: 25px;
+    filter:blur(160px);
+    box-shadow: 0 0 0 50px lightsalmon;
+
+  }
+  #home-footer-background2{
+    position: fixed;
+    height: 50px;
+    width: 100%;
+    left: 0;
+    background-color: lightsalmon;
+    z-index: -1;
+    bottom: 0;
+    opacity: .9;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+    border-radius: 10px;
+    filter:blur(160px);
+    box-shadow: 0 0 0 50px lightsalmon;
+
+  }
+
+  #home-footer-background3{
+    position: fixed;
+    left: 0;
+    height: 180px;
+    width: 100%;
+    background-color: rgb(36, 36, 162);
+    z-index: -1;
+    bottom: 0;
+    opacity: .7;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+    border-radius: 10px;
+    filter:blur(160px);
+    box-shadow: 0 0 0 50px white;
+
   }
