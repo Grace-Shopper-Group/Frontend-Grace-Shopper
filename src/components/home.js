@@ -38,7 +38,7 @@ const Home = (props) => {
     </div>
     </div>
    <div id="homeimagediv">
-   <img id="homeimage" src={`${process.env.PUBLIC_URL}/images/homepic.jpg`} />
+   <img id="homeimage" src={`${process.env.PUBLIC_URL}/images/homepic2.jpg`} />
    </div>
  </>);
     
