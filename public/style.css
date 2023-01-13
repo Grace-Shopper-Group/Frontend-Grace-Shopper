@@ -1,0 +1,64 @@
+
+/* HOME CSS */
+
+#home-category-title{
+display: flex;
+width: 100%;
+font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+font-size: x-large;
+letter-spacing: 2px;
+justify-content: center;
+}
+
+#home-category-container{
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    background-color: light plum;
+    margin-top: 20px;
+    gap: 10px;
+    height: 250px;
+    width:100%;
+}
+
+.home-category-box{
+    
+    width: 300px;
+    height: 250px;
+    justify-content: space-between;
+    background-color: lightblue;
+}
+
+#homeimagediv{
+
+    display:flex;
+    margin-top: 20px;
+    justify-content: center;
+}
+#homeimage{
+    height: 200px;
+    width: 400px;
+}
+
+.home-category-title{
+    display: flex;
+    justify-content: center;
+    font-size: x-large;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    letter-spacing: 2px;
+}
+
+.home-category-imagediv{
+display: flex;
+height: 200px;
+flex-direction: column;
+gap: 30px;
+justify-content: center;
+align-items: center;
+}
+
+.home-category-image{
+    width:170px;
+    height:80px;
+
+}
