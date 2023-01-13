@@ -2,8 +2,8 @@ import React, {useState, useEffect} from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Route, Switch, Link} from 'react-router-dom';
 //import { Login, Register, Logout, Admindash, Home} from './Components'
-import { Login, Register, Home} from './Components';
-import {fetchProducts} from './api/Requests.js';
+import { Login, Register, Home} from './Components/Index';
+import {fetchProducts} from './api/requests.js';
 
 
 const App = () => {
