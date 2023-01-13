@@ -1,8 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Route, Switch, Link} from 'react-router-dom';
-//import { Login, Register, Logout, Admindash, Home} from './Components'
-import { Login, Register, Home} from './Components/Index';
+import { Login, Register, Home, Products} from './Components/Index';
 import {fetchProducts} from './api/requests.js';
 
 
@@ -16,8 +15,9 @@ const App = () => {
       useEffect(()=> {
           const getAllProducts = async () => {
             try{
-            const {products} = await fetchProducts();
-            setAllProducts(products);
+            const products = await fetchProducts();
+            console.log("products useEffect", products.products)
+            setAllProducts(products.products);
             } catch(error) {
               console.error(error);
             }
@@ -36,23 +36,23 @@ const App = () => {
 <div id = "container">
     <div id = "nav-bar"> 
     <div className= "nav-bar-title">Sole Quest Men's Shoes</div>
+    <Link to = "/products">Products</Link>
     <Link to = "/register">Register</Link>
     <Link to = "/login">Login</Link>
     { token && user.isAdmin === true ? <Link to = "/admindash">Admin</Link> : null}
     {token ? <Link to = "/logout">Logout</Link> : null }
     </div>
-    <div id = "main-section">
+      <div id = "main-section">
           
           <Route path = "/" exact><Home></Home></Route>
+          <Route path = "/products"><Products allProducts={allProducts}></Products></Route>
           <Route path = "/login"><Login setToken = {setToken}></Login></Route>
           <Route path = "/register"><Register setToken = {setToken}></Register></Route>
           {/* <Route path = "/register"><Logout></Logout></Route> */}
           {/* <Route path = "/admindash"> <Admindash token = {token}></Admindash></Route>
           <Route path = "/category"> <Category token = {token}></Category></Route> */}
-         
-          
-  </div>
-  </div>
+      </div>
+    </div>
   </BrowserRouter>
   )
 };
