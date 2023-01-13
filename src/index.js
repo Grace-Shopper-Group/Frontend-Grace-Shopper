@@ -4,7 +4,6 @@ import { BrowserRouter, Route, Switch, Link} from 'react-router-dom';
 import { Login, Register, Home, Products} from './Components/Index';
 import {fetchProducts} from './api/requests.js';
 
-
 const App = () => {
   
     const [token, setToken] = useState(
@@ -26,9 +25,6 @@ const App = () => {
           getAllProducts();
         }, []);
 
-
-
-
       return (
         
     <BrowserRouter>
@@ -43,8 +39,8 @@ const App = () => {
     {token ? <Link to = "/logout">Logout</Link> : null }
     </div>
       <div id = "main-section">
-          
-          <Route path = "/" exact><Home></Home></Route>
+
+          <Route path = "/" exact><Home allProducts = {allProducts}></Home></Route>
           <Route path = "/products"><Products allProducts={allProducts}></Products></Route>
           <Route path = "/login"><Login setToken = {setToken}></Login></Route>
           <Route path = "/register"><Register setToken = {setToken}></Register></Route>
