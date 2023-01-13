@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { registerUser, logInUser } from '../api/Requests';
+import { registerUser, logInUser } from '../api/requests';
 import {Registerwelcome} from './Registerwelcome';
 
 
