@@ -43,7 +43,7 @@ const App = () => {
     </div>
     <div id = "main-section">
           
-          <Route path = "/" exact><Home></Home></Route>
+          <Route path = "/" exact><Home allProducts = {allProducts}></Home></Route>
           <Route path = "/login"><Login setToken = {setToken}></Login></Route>
           <Route path = "/register"><Register setToken = {setToken}></Register></Route>
           {/* <Route path = "/register"><Logout></Logout></Route> */}

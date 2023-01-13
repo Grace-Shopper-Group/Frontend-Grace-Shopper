@@ -1,0 +1,123 @@
+
+/* HOME CSS */
+
+#home-category-title{
+display: flex;
+width: 100%;
+font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+font-size: x-large;
+letter-spacing: 2px;
+justify-content: center;
+}
+
+#home-category-container{
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    background-color: light plum;
+    margin-top: 20px;
+    gap: 10px;
+    height: 250px;
+    width:100%;
+}
+
+.home-category-box{
+    
+    width: 300px;
+    height: 250px;
+    justify-content: space-between;
+  
+}
+
+#homeimagediv{
+
+    display:flex;
+    margin-top: 20px;
+    justify-content: center;
+}
+#homeimage{
+    height: 200px;
+    width: 300px;
+    border-radius: 10px;
+    
+}
+
+.home-category-title{
+    display: flex;
+    justify-content: center;
+    font-size: x-large;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    letter-spacing: 2px;
+    
+}
+
+.home-category-imagediv{
+display: flex;
+height: 200px;
+flex-direction: column;
+gap: 30px;
+justify-content: center;
+align-items: center;
+}
+
+.home-category-image{
+    width:170px;
+    height:80px;
+
+}
+
+.home-category-imagediv:hover {
+    transform: scale(1.1);
+    transition: transform 0.2s;
+  }
+  .home-category-title:hover {
+    transform: scale(1.1);
+    transition: transform 0.2s;
+  }
+
+  #home-footer-background1{
+    position: fixed;
+    height: 50px;
+    width: 100%;
+    left: 0;
+    background-color: lightsalmon;
+    z-index: -1;
+    bottom: 0;
+    opacity: .9;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 5%);
+    border-radius: 25px;
+    filter:blur(160px);
+    box-shadow: 0 0 0 50px lightsalmon;
+
+  }
+  #home-footer-background2{
+    position: fixed;
+    height: 50px;
+    width: 100%;
+    left: 0;
+    background-color: lightsalmon;
+    z-index: -1;
+    bottom: 0;
+    opacity: .9;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+    border-radius: 10px;
+    filter:blur(160px);
+    box-shadow: 0 0 0 50px lightsalmon;
+
+  }
+
+  #home-footer-background3{
+    position: fixed;
+    left: 0;
+    height: 180px;
+    width: 100%;
+    background-color: rgb(36, 36, 162);
+    z-index: -1;
+    bottom: 0;
+    opacity: .7;
+    border-radius: 50%;
+    transform: scaleY(0.5);
+    filter:blur(160px);
+    
+
+  }
