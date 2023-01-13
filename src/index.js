@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Route, Switch, Link} from 'react-router-dom';
-import { Login, Register, Home, Products} from './Components/Index';
+import { Login, Register, Home, Products} from './components/';
 import {fetchProducts} from './api/requests.js';
 
 const App = () => {
