@@ -10,17 +10,17 @@ const categoryProducts = allProducts.filter((product)=>{ return product.category
     
 
     return (
-        <div className="products">
+        <div className="category-products">
             <div className="ui cards">
                 {categoryProducts.map((product) => {
                     return (
                         <div key={product.id} className="ui card">
-                            <div className="content">
-                                <h1 className="description">{product.description}</h1>
-                                <h2 className="header">{product.brand}</h2>
-                                <img className="ui small image" src={product.imageUrl}></img>
+                            <div className="category-content">
+                                <h1 className="category-description">{product.description}</h1>
+                                <h2 className="category-brand">{product.brand}</h2>
+                                <img className="category-image" src={product.imageUrl}></img>
                                 <h3>Price: ${product.price}</h3>
-                                <button className="ui button" onClick={() => {/* add to cart function */}} >add to cart</button>
+                                <button className="category-cart-button" onClick={() => {/* add to cart function */}} >add to cart</button>
                             </div>
                         </div>
                     );

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { useHistory } from 'react-router-dom';
 
 
@@ -6,14 +6,16 @@ import { useHistory } from 'react-router-dom';
 
 const Home = (props) => {
 
-    
+    const[isClicked, setIsClicked] = useState(false)
     const history = useHistory()
     const {allProducts, setCategory} = props;
     console.log (allProducts)
 
     function clickedCategory(category) {
+        setIsClicked(true)
         setCategory(category)
         history.push('/category');
+        setIsClicked(false)
         
       }
     
