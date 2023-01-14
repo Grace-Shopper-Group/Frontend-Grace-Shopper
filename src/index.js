@@ -8,6 +8,7 @@ import {
   Products,
   Category,
   Admindash,
+  Feature
 } from "./Components/Index";
 import { fetchProducts } from "./api/requests.js";
 import "./index.css";
@@ -19,6 +20,7 @@ const App = () => {
   const [allProducts, setAllProducts] = useState([]);
   const [user, setUser] = useState([]);
   const [category, setCategory] = useState("athletic");
+  const [featureProductId, setFeatureProductId] = useState();
 
   useEffect(() => {
     const getAllProducts = async () => {
@@ -83,8 +85,19 @@ const App = () => {
               user={user}
               category={category}
               setCategory={setCategory}
+              setFeatureProductId={setFeatureProductId}
               allProducts={allProducts}
             ></Category>
+          </Route>
+          <Route path="/feature">
+            {" "}
+            <Feature
+              token={token}
+              user={user}
+              featureProductId={featureProductId}
+              setFeatureProductId={setFeatureProductId}
+              allProducts={allProducts}
+            ></Feature>
           </Route>
         </div>
       </div>
