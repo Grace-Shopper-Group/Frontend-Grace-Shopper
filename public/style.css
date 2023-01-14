@@ -48,6 +48,7 @@ justify-content: center;
     font-size: x-large;
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     letter-spacing: 2px;
+    margin-bottom: 10px;
     
 }
 
@@ -111,13 +112,13 @@ align-items: center;
     left: 0;
     height: 180px;
     width: 100%;
-    background-color: rgb(36, 36, 162);
+    background-color: rgb(140, 140, 236);
     z-index: -1;
     bottom: 0;
     opacity: .7;
     border-radius: 50%;
     transform: scaleY(0.5);
-    filter:blur(160px);
+    filter:blur(110px);
     
 
   }
