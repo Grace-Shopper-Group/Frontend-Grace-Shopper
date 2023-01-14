@@ -1,29 +1,34 @@
-import React, { useState, useEffect } from "react";
-import ReactDOM from "react-dom/client";
-import { BrowserRouter, Route, Switch, Link } from "react-router-dom";
-import { Login, Register, Home, Products } from "./components";
-import { fetchProducts } from "./api/requests.js";
+import React, {useState, useEffect} from 'react';
+import ReactDOM from 'react-dom/client';
+import { BrowserRouter, Route, Switch, Link} from 'react-router-dom';
+import { Login, Register, Home, Products, Category} from './Components/Index';
+import {fetchProducts} from './api/requests.js';
 import "./index.css";
+
 const App = () => {
-  const [token, setToken] = useState(
-    window.localStorage.getItem("token") || null
-  );
-  const [allProducts, setAllProducts] = useState([]);
-  const [user, setUser] = useState([]);
-  useEffect(() => {
-    const getAllProducts = async () => {
-      try {
-        const products = await fetchProducts();
-        console.log("products useEffect", products.products);
-        setAllProducts(products.products);
-      } catch (error) {
-        console.error(error);
-      }
-    };
+  
+    const [token, setToken] = useState(
+        window.localStorage.getItem("token") || null
+      );
+    const [allProducts, setAllProducts] = useState([]);
+    const [user, setUser] = useState([]);
+    const [category, setCategory] = useState("athletic");
 
-    getAllProducts();
-  }, []);
 
+      useEffect(()=> {
+          const getAllProducts = async () => {
+            try{
+            const products = await fetchProducts();
+            console.log("products useEffect", products.products)
+            setAllProducts(products.products);
+            } catch(error) {
+              console.error(error);
+            }
+          }
+  
+          getAllProducts();
+        }, []);
+        
   return (
     <BrowserRouter>
       <div id="container">
@@ -64,6 +69,7 @@ const App = () => {
           {/* <Route path = "/admindash"> <Admindash token = {token}></Admindash></Route>
           <Route path = "/category"> <Category token = {token}></Category></Route> */}
         </div>
+
       </div>
     </BrowserRouter>
   );
