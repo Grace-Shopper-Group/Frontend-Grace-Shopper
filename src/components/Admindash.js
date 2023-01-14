@@ -6,18 +6,110 @@ const AdminDash = (props) => {
   const [currentProduct, setCurrentProduct] = useState(null);
   const [editMode, setEditMode] = useState(false);
   const [deleteMode, setDeleteMode] = useState(false);
+  const [newProduct, setNewProduct] = useState({
+    brand: '',
+    description: '',
+    imageUrl: '',
+    price: ''
+});
 
-  return (
-    <div className="dashboard">
-      <button
-        className="ui green button"
-        onClick={() => {
-          /* add */
-        }}
-      >
-        Add
-      </button>
-      <div className="ui cards">
+const handleChange = (e) => {
+    e.preventDefault()
+
+    if(e.target.name === "brand"){
+        const brandNew = e.target.value;
+        setNewProduct({brand: brandNew})
+    };
+
+    if (e.target.name === "description"){
+        const descNew = e.target.value;
+        setNewProduct({description: descNew}) 
+    };
+
+    if (e.target.name === "imageUrl"){
+        const imgNew = e.target.value;
+        setNewProduct({imageUrl: imgNew}) 
+    };
+
+    if (e.target.name === "price"){
+        const priceNew = e.target.value;
+        setNewProduct({price: priceNew})
+    };
+}
+
+const handleClear = (e) => {
+    e.preventDefault()
+
+    setNewProduct({
+        brand: '',
+        description: '',
+        imageUrl: '',
+        price: ''
+    })
+}
+
+    return (
+        <div className="dashboard">
+            <h1 className="ui grey header">ADMIN DASHBOARD</h1>
+        <div className="ui cards">
+            
+        <div className="ui card" id="addProduct">
+            <h2 className="ui grey header">CREATE PRODUCT</h2>
+            <p>Please fill in all information.</p>
+            <br></br>
+            <div className="ui input">
+                
+            <input 
+                type="text"
+                value={newProduct.description}
+                name="description"
+                placeholder="description"
+                onChange={handleChange}
+            />
+            </div>
+            <div className="ui input">
+            <input
+                type="text"
+                value={newProduct.brand}
+                name="brand"
+                placeholder="brand"
+                onChange={handleChange}
+            />
+            </div>
+            <div className="ui input">
+            <input
+                type="text"
+                value={newProduct.imageUrl}
+                name="imageUrl"
+                placeholder="image url"
+                onChange={handleChange}
+            />
+            </div>
+            <div className="ui input">
+            <input
+                type="text"
+                value={newProduct.price}
+                name="price"
+                placeholder="price"
+                onChange={handleChange}
+            />
+            </div>
+
+            {editMode === false && deleteMode === false ? (
+            <>
+            <br></br>
+            <span>
+            <button className="ui red button" id="smallButtons" onClick={handleClear}>Clear</button>
+            <button className="ui green button" id="smallButtons">Create</button>
+            </span>
+           
+           
+            </> ) : "Currently making changes"} 
+
+            </div>
+            
+            
+
         {allProducts.map((product) => {
         
 
@@ -46,26 +138,27 @@ const AdminDash = (props) => {
                         setDeleteMode={setDeleteMode}>
                         </DeleteProduct>
                         {((product.id !== currentProduct.id) ? (
+                        
                         <div>
-                        <p>Currently making changes</p>
+                            <p>Currently making changes</p>
                         </div>):'')}
                     </div>
                     
                     ) : 
                     (<>
                         <h1 className="description">{product.description}</h1>
+                        
                         <h2 className="header">{product.brand}</h2>
+                        
                         <img className="ui small image" src={product.imageUrl}></img>
+                        
                         <h3>Price: ${product.price}</h3>
-                        <button
-                        className="ui basic red button"
-                        onClick={() => {
+                        
+                        <button className="ui basic red button" id="smallButtons" onClick={() => {
                         setCurrentProduct(product);
-                        setEditMode(true);
-                        }}>Edit</button>
-                        <button
-                        className="ui red button"
-                        onClick={() => {
+                        setEditMode(true);}}>Edit</button>
+                        
+                        <button className="ui red button" id="smallButtons" onClick={() => {
                         setCurrentProduct(product)
                         setDeleteMode(true);
                         }}>Delete</button>
@@ -79,6 +172,7 @@ const AdminDash = (props) => {
     </div>
   );
 };
+
 
 export default AdminDash;
 

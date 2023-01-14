@@ -11,7 +11,6 @@ import React, { useState } from "react";
     });
     // console.log(editedProduct)
 
-
     const handleChange = (e) => {
         e.preventDefault()
 
@@ -34,6 +33,10 @@ import React, { useState } from "react";
             const priceEdited = e.target.value;
             console.log({price: priceEdited})
         };
+    }
+
+    const handleClick = (e) => {
+        
     }
     
     if (editMode === true && product.id === editingProduct.id) {
@@ -76,22 +79,24 @@ import React, { useState } from "react";
             onChange={handleChange}
           />
           </div>
+          
           <button
             className="ui red button"
-            onClick={() => {
-            //   const changedProduct = patchProduct(productId, editedProduct)
-            }}
+            id="mediumButtons"
+            onClick={handleClick}
           >
             Save Changes
           </button>
           <button
             className="ui basic red button"
+            id="mediumButtons"
             onClick={() => {
                 setEditMode(false)
             }}
           >
             Cancel Changes
           </button>
+          
         </>
       );
     } return <>

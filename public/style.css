@@ -122,3 +122,42 @@ align-items: center;
     
 
   }
+  #addProduct{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    padding:20px;
+    border: 2px solid black;
+    width:35vh;
+    
+    
+  }
+
+  .ui.card{
+    text-align: center;
+
+  }
+  .ui.cards{
+    display:flex;
+    justify-content: space-around;
+    align-items:center;
+    flex-wrap: wrap;
+    margin:0px;
+    background-color: lightblue;
+
+  }
+
+  .dashboard{
+    margin: 20px;
+    text-align: center;
+  }
+
+  #smallButtons{
+    width: 10vh;
+  }
+  #mediumButtons{
+    width: 20vh;
+  }
+
+
