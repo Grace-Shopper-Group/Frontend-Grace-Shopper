@@ -8,7 +8,6 @@ const AdminDash = (props) => {
   const [productId, setProductId] = useState('')
   const [editName, setEditName] = useState("Edit")
 
-
   return (
     <div className="dashboard">
       <button
