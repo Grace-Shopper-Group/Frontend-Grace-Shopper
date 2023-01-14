@@ -7,6 +7,7 @@ export {default as Category} from "./Category"
 // export {default as Feature} from "./Feature"
 export {default as Admindash} from "./Admindash";
 export {default as EditProduct} from "./EditProduct";
+export {default as DeleteProduct} from "./DeleteProduct";
 // export {default as Loginwelcome} from "./Loginwelcome";
 // export {default as Registerwelcome} from "./Registerwelcome";
 // export {default as Profile} from "./Profile";

@@ -1,12 +1,11 @@
 import React, { useState } from "react";
-import { EditProduct } from './Index'
+import { EditProduct, DeleteProduct } from "./Index";
 
 const AdminDash = (props) => {
   const { user, tokenString, allProducts } = props;
-  const [addTrigger, setAddTrigger] = useState(false);
-  const [trigger, setTrigger] = useState(false);
-  const [productId, setProductId] = useState('')
-  const [editName, setEditName] = useState("Edit")
+  const [currentProduct, setCurrentProduct] = useState(null);
+  const [editMode, setEditMode] = useState(false);
+  const [deleteMode, setDeleteMode] = useState(false);
 
   return (
     <div className="dashboard">
@@ -20,35 +19,58 @@ const AdminDash = (props) => {
       </button>
       <div className="ui cards">
         {allProducts.map((product) => {
+        
+
           return (
             <div key={product.id} className="ui card">
               <div className="content">
-
-                <EditProduct product={product} productId={productId} trigger={trigger} setEditName={setEditName}></EditProduct>
-
-                <button
-                  className="ui basic red button"
-                  onClick={() => {
-                    if (trigger === false) {
-                      setTrigger(true);
-                      setProductId(product.id)
-                      setEditName("Cancel Changes")
-                    } else {
-                      setTrigger(false);
-                      setEditName("Edit")
-                    }
-                  }}
-                >
-                  {editName}
-                </button>
-                <button
-                  className="ui red button"
-                  onClick={() => {
-                    /* delete */
-                  }}
-                >
-                  Delete
-                </button>
+                {(editMode === true && deleteMode === false) ? (
+                   <div>
+                   <EditProduct
+                   product={product}
+                   editingProduct={currentProduct}
+                   editMode={editMode}
+                   setEditMode={setEditMode}>
+                   </EditProduct>
+                   {((product.id !== currentProduct.id) ? (
+                        <div>
+                        <p>Currently making changes</p>
+                        </div>):'')}
+                   </div>
+                ) : (deleteMode === true && editMode === false) ? (
+                    <div>
+                        <DeleteProduct
+                        product={product}
+                        currentProduct={currentProduct}
+                        deleteMode={deleteMode}
+                        setDeleteMode={setDeleteMode}>
+                        </DeleteProduct>
+                        {((product.id !== currentProduct.id) ? (
+                        <div>
+                        <p>Currently making changes</p>
+                        </div>):'')}
+                    </div>
+                    
+                    ) : 
+                    (<>
+                        <h1 className="description">{product.description}</h1>
+                        <h2 className="header">{product.brand}</h2>
+                        <img className="ui small image" src={product.imageUrl}></img>
+                        <h3>Price: ${product.price}</h3>
+                        <button
+                        className="ui basic red button"
+                        onClick={() => {
+                        setCurrentProduct(product);
+                        setEditMode(true);
+                        }}>Edit</button>
+                        <button
+                        className="ui red button"
+                        onClick={() => {
+                        setCurrentProduct(product)
+                        setDeleteMode(true);
+                        }}>Delete</button>
+                        </>)}
+                
               </div>
             </div>
           );

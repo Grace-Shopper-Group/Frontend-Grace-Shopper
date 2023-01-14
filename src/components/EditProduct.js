@@ -1,35 +1,54 @@
 import React, { useState } from "react";
 
+
   const EditProduct = (props) => {
-    const {product, trigger, productId, setEditName} = props;
+    const {editingProduct, setEditMode, editMode, product} = props;
     const [editedProduct, setEditedProduct] = useState({
         brand: product.brand,
         description: product.description,
         imageUrl: product.imageUrl,
         price: product.price
     });
+    // console.log(editedProduct)
+
 
     const handleChange = (e) => {
         e.preventDefault()
 
-        if(e.target.name === "brand"){setEditedProduct({brand: e.target.value});}
-        if(e.target.name === "description"){setEditedProduct({ description: e.value });}
-        if(e.target.name === "imageUrl"){setEditedProduct({ imageUrl: e.target.value});}
-        if(e.target.name === "price"){setEditedProduct({ price: e.target.value});}
+        if(e.target.name === "brand"){
+            const brandEdited = e.target.value;
+            setEditedProduct({brand: brandEdited})
+        };
+
+        if (e.target.name === "description"){
+            const descEdited = e.target.value;
+            setEditedProduct({description: descEdited}) 
+        };
+
+        if (e.target.name === "imageUrl"){
+            const imgEdited = e.target.value;
+            console.log({imageUrl: imgEdited}) 
+        };
+
+        if (e.target.name === "price"){
+            const priceEdited = e.target.value;
+            console.log({price: priceEdited})
+        };
+    }
     
-
-      };
-
-    if (trigger === true && product.id === productId) {
+    if (editMode === true && product.id === editingProduct.id) {
       return (
-        <>
-          <input
+      <>
+        <div className="ui input">
+          <input 
             type="text"
             name="description"
             placeholder="description"
             value={editedProduct.description} 
             onChange={handleChange}
           />
+          </div>
+          <div className="ui input">
           <input
             type="text"
             name="brand"
@@ -37,7 +56,9 @@ import React, { useState } from "react";
             value={editedProduct.brand} 
             onChange={handleChange}
           />
+          </div>
           <img className="ui small image" src={product.imageUrl}></img>
+          <div className="ui input">
           <input
             type="text"
             name="imageUrl"
@@ -45,6 +66,8 @@ import React, { useState } from "react";
             value={editedProduct.imageUrl} 
             onChange={handleChange}
           />
+          </div>
+          <div className="ui input">
           <input
             type="text"
             name="price"
@@ -52,13 +75,22 @@ import React, { useState } from "react";
             value={editedProduct.price} 
             onChange={handleChange}
           />
+          </div>
           <button
-            className="ui basic red button"
+            className="ui red button"
             onClick={() => {
             //   const changedProduct = patchProduct(productId, editedProduct)
             }}
           >
             Save Changes
+          </button>
+          <button
+            className="ui basic red button"
+            onClick={() => {
+                setEditMode(false)
+            }}
+          >
+            Cancel Changes
           </button>
         </>
       );
