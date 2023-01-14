@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 const Products = (props) => {
-    const { user, tokenString, allProducts } = props
+    const { user, token, allProducts } = props
     
     
 

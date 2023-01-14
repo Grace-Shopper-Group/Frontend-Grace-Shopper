@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Route, Switch, Link} from 'react-router-dom';
-import { Login, Register, Home, Products} from './Components/Index';
+import { Login, Register, Home, Products, Category} from './Components/Index';
 import {fetchProducts} from './api/requests.js';
 
 const App = () => {
@@ -9,8 +9,13 @@ const App = () => {
     const [token, setToken] = useState(
         window.localStorage.getItem("token") || null
       );
-      const [allProducts, setAllProducts] = useState([]);
-      const [user, setUser] = useState([]);
+    const [allProducts, setAllProducts] = useState([]);
+    const [user, setUser] = useState([]);
+    const [category, setCategory] = useState("athletic");
+
+
+
+
       useEffect(()=> {
           const getAllProducts = async () => {
             try{
@@ -40,13 +45,14 @@ const App = () => {
     </div>
       <div id = "main-section">
 
-          <Route path = "/" exact><Home allProducts = {allProducts}></Home></Route>
-          <Route path = "/products"><Products allProducts={allProducts}></Products></Route>
+          <Route path = "/" exact><Home allProducts = {allProducts} setCategory = {setCategory}></Home></Route>
+          <Route path = "/products"><Products allProducts={allProducts} user={user} token={token}></Products></Route>
           <Route path = "/login"><Login setToken = {setToken}></Login></Route>
           <Route path = "/register"><Register setToken = {setToken}></Register></Route>
           {/* <Route path = "/register"><Logout></Logout></Route> */}
-          {/* <Route path = "/admindash"> <Admindash token = {token}></Admindash></Route>
-          <Route path = "/category"> <Category token = {token}></Category></Route> */}
+          {/* <Route path = "/admindash"> <Admindash token = {token}></Admindash></Route> */}
+          <Route path = "/category"> <Category token = {token} user = {user} category = {category} 
+                        setCategory = {setCategory} allProducts = {allProducts}></Category></Route>
       </div>
     </div>
   </BrowserRouter>
