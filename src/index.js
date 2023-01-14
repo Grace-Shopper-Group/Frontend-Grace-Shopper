@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Route, Switch, Link} from 'react-router-dom';
-import { Login, Register, Home, Products, Category} from './Components/Index';
+import { Login, Register, Home, Products, Category, Admindash} from './Components/Index';
 import {fetchProducts} from './api/requests.js';
 
 const App = () => {
@@ -20,7 +20,6 @@ const App = () => {
           const getAllProducts = async () => {
             try{
             const products = await fetchProducts();
-            console.log("products useEffect", products.products)
             setAllProducts(products.products);
             } catch(error) {
               console.error(error);
@@ -40,7 +39,7 @@ const App = () => {
     <Link to = "/products">Products</Link>
     <Link to = "/register">Register</Link>
     <Link to = "/login">Login</Link>
-    { token && user.isAdmin === true ? <Link to = "/admindash">Admin</Link> : null}
+    {/* { token && user.isAdmin === true ?*/} <Link to = "/admindash">Admin</Link>
     {token ? <Link to = "/logout">Logout</Link> : null }
     </div>
       <div id = "main-section">
@@ -50,7 +49,7 @@ const App = () => {
           <Route path = "/login"><Login setToken = {setToken}></Login></Route>
           <Route path = "/register"><Register setToken = {setToken}></Register></Route>
           {/* <Route path = "/register"><Logout></Logout></Route> */}
-          {/* <Route path = "/admindash"> <Admindash token = {token}></Admindash></Route> */}
+          <Route path = "/admindash"> <Admindash token = {token} allProducts={allProducts}></Admindash></Route>
           <Route path = "/category"> <Category token = {token} user = {user} category = {category} 
                         setCategory = {setCategory} allProducts = {allProducts}></Category></Route>
       </div>
