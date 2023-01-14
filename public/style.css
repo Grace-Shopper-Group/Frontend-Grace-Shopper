@@ -68,10 +68,12 @@ align-items: center;
 }
 
 .home-category-imagediv:hover {
+    cursor: pointer;
     transform: scale(1.1);
     transition: transform 0.2s;
   }
   .home-category-title:hover {
+    cursor: pointer;
     transform: scale(1.1);
     transition: transform 0.2s;
   }
@@ -131,12 +133,16 @@ align-items: center;
     }
     
     .category-image:hover {
+        cursor: pointer;
+        font-weight: 900;
         transform: scale(1.1);
         transition: transform 0.2s;
       }
       .category-description:hover {
-        transform: scale(1.1);
-        transition: transform 0.2s;
+        
+        cursor: pointer;
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.291);
+        transition: transform 5s;
       }
 
 

@@ -11,13 +11,12 @@ const Home = (props) => {
     const {allProducts, setCategory} = props;
     console.log (allProducts)
 
+    
     function clickedCategory(category) {
-        setIsClicked(true)
-        setCategory(category)
-        history.push('/category');
-        setIsClicked(false)
-        
-      }
+    
+        setCategory(category),
+        history.push('/category')
+        }
     
    
     return (<> 
