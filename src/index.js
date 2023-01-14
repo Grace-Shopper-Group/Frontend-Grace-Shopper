@@ -1,20 +1,3 @@
-<<<<<<< HEAD
-import React, {useState, useEffect} from 'react';
-import ReactDOM from 'react-dom/client';
-import { BrowserRouter, Route, Switch, Link} from 'react-router-dom';
-import { Login, Register, Home, Products, Category, Feature } from './Components/Index';
-import {fetchProducts} from './api/requests.js';
-
-const App = () => {
-  
-    const [token, setToken] = useState(
-        window.localStorage.getItem("token") || null
-      );
-    const [allProducts, setAllProducts] = useState([]);
-    const [user, setUser] = useState([]);
-    const [category, setCategory] = useState("");
-    const [featureId, setFeatureId] = useState();
-=======
 import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Route, Switch, Link } from "react-router-dom";
@@ -36,7 +19,6 @@ const App = () => {
   const [allProducts, setAllProducts] = useState([]);
   const [user, setUser] = useState([]);
   const [category, setCategory] = useState("athletic");
->>>>>>> main
 
   useEffect(() => {
     const getAllProducts = async () => {
@@ -48,29 +30,10 @@ const App = () => {
       }
     };
 
-<<<<<<< HEAD
-    useEffect(()=> {
-          const getAllProducts = async () => {
-            try{
-            const products = await fetchProducts();
-            console.log("products useEffect", products.products)
-            setAllProducts(products.products);
-            } catch(error) {
-              console.error(error);
-            }
-          }
-  
-          getAllProducts();
-        }, []);
-
-      return (
-        
-=======
     getAllProducts();
   }, []);
 
   return (
->>>>>>> main
     <BrowserRouter>
       <div id="container">
         <div className="nav-bar-title">Sole Quest</div>
@@ -109,13 +72,6 @@ const App = () => {
             <Register setToken={setToken}></Register>
           </Route>
           {/* <Route path = "/register"><Logout></Logout></Route> */}
-<<<<<<< HEAD
-          {/* <Route path = "/admindash"> <Admindash token = {token}></Admindash></Route> */}
-          <Route path = "/category"> <Category token = {token} user = {user} category = {category} 
-                        setCategory = {setCategory} setFeatureId = {setFeatureId} allProducts = {allProducts}></Category></Route>
-          <Route path = "/feature"> <Feature token = {token} user = {user} featureId = {featureId} 
-                        setFeatureId = {setFeatureId} allProducts = {allProducts}></Feature></Route>
-=======
           <Route path="/admindash">
             {" "}
             <Admindash token={token} allProducts={allProducts}></Admindash>
@@ -131,7 +87,6 @@ const App = () => {
             ></Category>
           </Route>
         </div>
->>>>>>> main
       </div>
     </BrowserRouter>
   );
