@@ -26,17 +26,16 @@ import React, { useState } from "react";
 
         if (e.target.name === "imageUrl"){
             const imgEdited = e.target.value;
-            console.log({imageUrl: imgEdited}) 
+            setEditedProduct({imageUrl: imgEdited}) 
         };
 
         if (e.target.name === "price"){
             const priceEdited = e.target.value;
-            console.log({price: priceEdited})
+            setEditedProduct({price: priceEdited})
         };
     }
 
     const handleClick = (e) => {
-        
     }
     
     if (editMode === true && product.id === editingProduct.id) {
@@ -72,7 +71,7 @@ import React, { useState } from "react";
           </div>
           <div className="ui input">
           <input
-            type="text"
+            type="number"
             name="price"
             placeholder="price"
             value={editedProduct.price} 

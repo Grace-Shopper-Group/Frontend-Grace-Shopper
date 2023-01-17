@@ -87,7 +87,7 @@ const handleClear = (e) => {
             </div>
             <div className="ui input">
             <input
-                type="text"
+                type="number"
                 value={newProduct.price}
                 name="price"
                 placeholder="price"

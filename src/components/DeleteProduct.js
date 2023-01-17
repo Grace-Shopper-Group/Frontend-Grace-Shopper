@@ -2,7 +2,6 @@ import React, { useState } from "react";
 
 const DeleteProduct = (props) => {
   const { deleteMode, setDeleteMode, product, currentProduct } = props;
-  console.log(deleteMode, product, currentProduct)
 
 if (product.id === currentProduct.id){
     return (
