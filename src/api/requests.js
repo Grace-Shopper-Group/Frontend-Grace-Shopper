@@ -16,7 +16,9 @@ const makeHeaders = (token) => {
 export const apiCall = async (endpoint, defaultOptions= {}) => {
     const {token, method, body} = defaultOptions;
     
-    const options = {};
+    const options = {
+      mode: 'cors'
+    };
     options.headers = makeHeaders(token);
     if (method) {
       options.method = method;

@@ -57,7 +57,7 @@ const Login = (props) => {
             </div>
             <button className="submit-form" type="submit" onClick={handleLogin}>Submit</button>
             <div>
-                {loggedIn && <Loginwelcome />}
+                {/* {loggedIn && <Loginwelcome />} */}
             </div>
 
             {/*login*/}
