@@ -7,6 +7,7 @@ import React, { useState } from "react";
         brand: product.brand,
         description: product.description,
         imageUrl: product.imageUrl,
+        category: product.category,
         price: product.price
     });
     // console.log(editedProduct)
@@ -29,13 +30,19 @@ import React, { useState } from "react";
             setEditedProduct({imageUrl: imgEdited}) 
         };
 
+        if (e.target.name === "category"){
+            const categoryEdited = e.target.value;
+            setEditedProduct({category: categoryEdited}) 
+        };
+
         if (e.target.name === "price"){
             const priceEdited = e.target.value;
             setEditedProduct({price: priceEdited})
         };
     }
 
-    const handleClick = (e) => {
+    const handleClick = async (e) => {
+        // const changedProduct = await patchProduct(editedProduct)
     }
     
     if (editMode === true && product.id === editingProduct.id) {
@@ -66,6 +73,15 @@ import React, { useState } from "react";
             name="imageUrl"
             placeholder="image url"
             value={editedProduct.imageUrl} 
+            onChange={handleChange}
+          />
+          </div>
+          <div className="ui input">
+          <input
+            type="text"
+            name="category"
+            placeholder="category"
+            value={editedProduct.category} 
             onChange={handleChange}
           />
           </div>
@@ -102,6 +118,7 @@ import React, { useState } from "react";
         <h1 className="description">{product.description}</h1>
         <h2 className="header">{product.brand}</h2>
         <img className="ui small image" src={product.imageUrl}></img>
+        <h3>Category: {product.category}</h3>
         <h3>Price: ${product.price}</h3>
     </>
   }

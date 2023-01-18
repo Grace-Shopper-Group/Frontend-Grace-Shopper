@@ -2,19 +2,20 @@ import React, { useState } from "react";
 
 const DeleteProduct = (props) => {
   const { deleteMode, setDeleteMode, product, currentProduct } = props;
+//   console.log(deleteMode, product, currentProduct)
 
 if (product.id === currentProduct.id){
     return (
-        <div>
-        <button className="ui basic red button" id="smallButtons" onClick={() => {setDeleteMode(false)}}>Close</button>
+        <>
         <h3>{`Are you sure you want to delete ${currentProduct.description}?`}</h3>
+        <br></br>
         <div className="ui input">
-            <input 
-            placeholder="Enter Admin Password"
-            ></input>
+            <input placeholder="Enter Admin Password"></input>
         </div>
-        <button className="ui red button" onClick={()=>{handleDelete}}>Yes, I want to delete this forever.</button>
-        </div>
+        
+        <button className="ui red button" id="mediumButtons" onClick={()=>{handleDelete}}>Yes, I'm sure</button>
+        <button className="ui basic red button" id="mediumButtons" onClick={() => {setDeleteMode(false)}}>Close</button>
+        </>
         )
     }
 
