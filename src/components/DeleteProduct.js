@@ -24,6 +24,7 @@ if (product.id === currentProduct.id){
         <h1 className="description">{product.description}</h1>
         <h2 className="header">{product.brand}</h2>
         <img className="ui small image" src={product.imageUrl}></img>
+        <h3>Category: {product.category}</h3>
         <h3>Price: ${product.price}</h3>
     </>
  }
