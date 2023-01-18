@@ -54,7 +54,7 @@ const Register = (props) => {
         </div>
         <button className="submit-form" type="submit" onClick={handleRegister}>Submit</button>
         <div>
-            {registered && <Registerwelcome />}
+            {/* {registered && <Registerwelcome />} */}
         </div>
 
         {/*register*/}

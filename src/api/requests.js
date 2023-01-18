@@ -48,7 +48,7 @@ export const apiCall = async (endpoint, defaultOptions= {}) => {
 
   export const registerUser = async (username, password) => {
     try {
-      const {user, message, token, error} = await apiCall('register', {token: null, method: "Post", body: { username: username,
+      const {user, message, token, error} = await apiCall('users/register', {token: null, method: "Post", body: { username: username,
       password: password}} );
       if (!error) {
     //    console.log(username, data.token)
@@ -79,7 +79,7 @@ export const apiCall = async (endpoint, defaultOptions= {}) => {
 
   export const logInUser = async (username, password) => {
     
-      const {user, message, token, error} = await apiCall('login', {token: null, method: "Post", body: {username: username,
+      const {user, message, token, error} = await apiCall('users/login', {token: null, method: "Post", body: {username: username,
       password: password}} );
       if (!error) {
        // console.log(username, data.token)
