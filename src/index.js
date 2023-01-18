@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Route, Switch, Link} from 'react-router-dom';
-import { Login, Register, Home, Products, Category, Admindash} from './Components/Index';
+import { Login, Register, Home, Products, Category, Admindash, Feature} from './Components/Index';
 import {fetchProducts} from './api/requests.js';
 
 const App = () => {
@@ -12,6 +12,7 @@ const App = () => {
     const [allProducts, setAllProducts] = useState([]);
     const [user, setUser] = useState([]);
     const [category, setCategory] = useState("athletic");
+    const [featureProductId, setFeatureProductId] = useState();
 
 
 
@@ -51,7 +52,9 @@ const App = () => {
           {/* <Route path = "/register"><Logout></Logout></Route> */}
           <Route path = "/admindash"> <Admindash token = {token} allProducts={allProducts}></Admindash></Route>
           <Route path = "/category"> <Category token = {token} user = {user} category = {category} 
-                        setCategory = {setCategory} allProducts = {allProducts}></Category></Route>
+                        setCategory = {setCategory} allProducts = {allProducts} setFeatureProductId = {setFeatureProductId}></Category></Route>
+          <Route path = "/feature"> <Feature token = {token} user = {user} featureProductId = {featureProductId}
+                                    setFeatureProductId = {setFeatureProductId} allProducts = {allProducts}></Feature></Route>
       </div>
     </div>
   </BrowserRouter>
