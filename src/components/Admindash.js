@@ -10,8 +10,16 @@ const AdminDash = (props) => {
     brand: '',
     description: '',
     imageUrl: '',
+    category: '',
     price: ''
 });
+
+if(allProducts.length === 0){
+   return (<>
+     <div className="ui active inverted dimmer"> 
+     <div className="ui indeterminate text loader">Loading</div>
+     </div>
+     </>)}
 
 const handleChange = (e) => {
     e.preventDefault()
@@ -31,6 +39,11 @@ const handleChange = (e) => {
         setNewProduct({imageUrl: imgNew}) 
     };
 
+    if (e.target.name === "category"){
+        const categoryNew = e.target.value;
+        setNewProduct({category: categoryNew}) 
+    };
+
     if (e.target.name === "price"){
         const priceNew = e.target.value;
         setNewProduct({price: priceNew})
@@ -44,14 +57,16 @@ const handleClear = (e) => {
         brand: '',
         description: '',
         imageUrl: '',
+        category: '',
         price: ''
     })
 }
 
-    return (
+    return (<>
         <div className="dashboard">
             <h1 className="ui grey header">ADMIN DASHBOARD</h1>
         <div className="ui cards">
+
             
         <div className="ui card" id="addProduct">
             <h2 className="ui grey header">CREATE PRODUCT</h2>
@@ -82,6 +97,15 @@ const handleClear = (e) => {
                 value={newProduct.imageUrl}
                 name="imageUrl"
                 placeholder="image url"
+                onChange={handleChange}
+            />
+            </div>
+            <div className="ui input">
+            <input
+                type="text"
+                value={newProduct.category}
+                name="category"
+                placeholder="category"
                 onChange={handleChange}
             />
             </div>
@@ -147,13 +171,10 @@ const handleClear = (e) => {
                     ) : 
                     (<>
                         <h1 className="description">{product.description}</h1>
-                        
                         <h2 className="header">{product.brand}</h2>
-                        
                         <img className="ui small image" src={product.imageUrl}></img>
-                        
+                        <h3>Category: {product.category}</h3>
                         <h3>Price: ${product.price}</h3>
-                        
                         <button className="ui basic red button" id="smallButtons" onClick={() => {
                         setCurrentProduct(product);
                         setEditMode(true);}}>Edit</button>
@@ -170,6 +191,7 @@ const handleClear = (e) => {
         })}
       </div>
     </div>
+    </>
   );
 };
 
