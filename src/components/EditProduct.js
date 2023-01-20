@@ -1,35 +1,63 @@
 import React, { useState } from "react";
 
+
   const EditProduct = (props) => {
-    const {product, trigger, productId, setEditName} = props;
+    const {editingProduct, setEditMode, editMode, product} = props;
     const [editedProduct, setEditedProduct] = useState({
         brand: product.brand,
         description: product.description,
         imageUrl: product.imageUrl,
+        category: product.category,
         price: product.price
     });
+    // console.log(editedProduct)
 
     const handleChange = (e) => {
         e.preventDefault()
 
-        if(e.target.name === "brand"){setEditedProduct({brand: e.target.value});}
-        if(e.target.name === "description"){setEditedProduct({ description: e.value });}
-        if(e.target.name === "imageUrl"){setEditedProduct({ imageUrl: e.target.value});}
-        if(e.target.name === "price"){setEditedProduct({ price: e.target.value});}
+        if(e.target.name === "brand"){
+            const brandEdited = e.target.value;
+            setEditedProduct({brand: brandEdited})
+        };
+
+        if (e.target.name === "description"){
+            const descEdited = e.target.value;
+            setEditedProduct({description: descEdited}) 
+        };
+
+        if (e.target.name === "imageUrl"){
+            const imgEdited = e.target.value;
+            setEditedProduct({imageUrl: imgEdited}) 
+        };
+
+        if (e.target.name === "category"){
+            const categoryEdited = e.target.value;
+            setEditedProduct({category: categoryEdited}) 
+        };
+
+        if (e.target.name === "price"){
+            const priceEdited = e.target.value;
+            setEditedProduct({price: priceEdited})
+        };
+    }
+
+    const handleClick = async (e) => {
+        // const changedProduct = await patchProduct(editedProduct)
+    }
     
-
-      };
-
-    if (trigger === true && product.id === productId) {
+    if (editMode === true && product.id === editingProduct.id) {
       return (
-        <>
-          <input
+      <>
+        <div className="ui input">
+          <input 
             type="text"
             name="description"
             placeholder="description"
             value={editedProduct.description} 
             onChange={handleChange}
           />
+          </div>
+          <div className="ui input">
           <input
             type="text"
             name="brand"
@@ -37,7 +65,9 @@ import React, { useState } from "react";
             value={editedProduct.brand} 
             onChange={handleChange}
           />
+          </div>
           <img className="ui small image" src={product.imageUrl}></img>
+          <div className="ui input">
           <input
             type="text"
             name="imageUrl"
@@ -45,27 +75,50 @@ import React, { useState } from "react";
             value={editedProduct.imageUrl} 
             onChange={handleChange}
           />
+          </div>
+          <div className="ui input">
           <input
             type="text"
+            name="category"
+            placeholder="category"
+            value={editedProduct.category} 
+            onChange={handleChange}
+          />
+          </div>
+          <div className="ui input">
+          <input
+            type="number"
             name="price"
             placeholder="price"
             value={editedProduct.price} 
             onChange={handleChange}
           />
+          </div>
+          
           <button
-            className="ui basic red button"
-            onClick={() => {
-            //   const changedProduct = patchProduct(productId, editedProduct)
-            }}
+            className="ui red button"
+            id="mediumButtons"
+            onClick={handleClick}
           >
             Save Changes
           </button>
+          <button
+            className="ui basic red button"
+            id="mediumButtons"
+            onClick={() => {
+                setEditMode(false)
+            }}
+          >
+            Cancel Changes
+          </button>
+          
         </>
       );
     } return <>
         <h1 className="description">{product.description}</h1>
         <h2 className="header">{product.brand}</h2>
         <img className="ui small image" src={product.imageUrl}></img>
+        <h3>Category: {product.category}</h3>
         <h3>Price: ${product.price}</h3>
     </>
   }

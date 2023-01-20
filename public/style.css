@@ -122,6 +122,69 @@ align-items: center;
     
 
   }
+/* PRODUCT CSS */
+  #addProduct{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    padding:20px;
+    border: 2px solid black;
+    width:35vh;
+  }
+
+  .ui.card{
+    text-align: center;
+
+  }
+  .ui.cards{
+    display:flex;
+    justify-content: space-evenly;
+    align-items:center;
+    flex-wrap: wrap;
+    margin:0px;
+    background-color: rgb(235, 242, 244);
+
+  }
+
+  .dashboard{
+    margin: 20px;
+    text-align: center;
+  }
+
+  #smallButtons{
+    width: 10vh;
+  }
+  #mediumButtons{
+    width: 20vh;
+    margin-top: 5px;
+  }
+
+    /* category CSS */
+
+    .category-image{
+      margin-left: 20px;
+      width:170px;
+      height:80px;
+  }
+  .category-image:hover {
+      cursor: pointer;
+      font-weight: 900;
+      transform: scale(1.1);
+      transition: transform 0.2s;
+    }
+    .category-description:hover {
+      
+      cursor: pointer;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.291);
+      transition: transform 5s;
+    }
+     /* feature CSS */
+     .feature-image{
+      margin-left: 20px;
+      width:170px;
+      height:80px;
+  }
 
    /* category CSS */
 
