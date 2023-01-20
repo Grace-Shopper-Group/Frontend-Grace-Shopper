@@ -1,4 +1,5 @@
-const BASEURL = "https://grace-shopper-8lm0.onrender.com/api";
+const BASEURL = "http://localhost:1337/api";
+
 
 const makeHeaders = (token) => {
     const headers = {
@@ -27,6 +28,7 @@ export const apiCall = async (endpoint, defaultOptions= {}) => {
       options.body = JSON.stringify(body);
     }
       const response = await fetch(`${BASEURL}/${endpoint}`, options);
+    
       const result = await response.json();
       console.log(result);
       return result;
@@ -41,7 +43,7 @@ export const apiCall = async (endpoint, defaultOptions= {}) => {
       }
     } else {
       return {
-        error: "Failed to Load apiCall in fetchProducts",
+        error: result.error,
         products: []
       }
     }
@@ -49,8 +51,9 @@ export const apiCall = async (endpoint, defaultOptions= {}) => {
 
 
   export const registerUser = async (username, password) => {
+    console.log ("registerUser", name, password)
     try {
-      const {user, message, token, error} = await apiCall('users/register', {token: null, method: "Post", body: { username: username,
+      const {user, message, token, error} = await apiCall('users/register', {token: null, method: "POST", body: { username: username,
       password: password}} );
       if (!error) {
     //    console.log(username, data.token)
@@ -69,9 +72,9 @@ export const apiCall = async (endpoint, defaultOptions= {}) => {
         }
       }
     } catch (error){
-      alert(error);
+      console(error);
       return {
-        error: error.message,
+        error: result,
         token: null,
         message: null,
         user: null
