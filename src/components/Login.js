@@ -17,8 +17,9 @@ const Login = (props) => {
     const otherOnSubmitHandler = async (event) => {
         // console.log("onSubmitHandler() in Login called");
          event.preventDefault();
+         console.log("hello")
          const {error, token, message} = await logInUser(loginUsername, loginPassword);
-      
+         console.log("token",token, message)
          setToken(token);
          window.localStorage.setItem('token', token);
 
@@ -51,6 +52,7 @@ const Login = (props) => {
                     type="password"
                     value={loginPassword}
                     placeholder="password"
+                    autoComplete="current-password"
                     minLength="8"
                     required
                     onChange={(event) => { setLoginPassword(event.target.value); } } />
