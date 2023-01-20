@@ -12,7 +12,7 @@ const Register = (props) => {
    
 
     const onSubmitHandler = async (event) => {
-        //console.log("onSubmitHandler() called");
+        console.log("onSubmitHandler() called");
         event.preventDefault();
         const {error, token, message, user} = await registerUser(username, password);
         
