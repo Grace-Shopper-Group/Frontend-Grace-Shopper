@@ -4,9 +4,7 @@ import React from "react";
 
 const Loginwelcome = (props) => {
 
-    const {loginUsername} = props
-
-    
+    const {loginUsername} = props   
     
     return (
         <div className="welcome">

@@ -1,18 +1,20 @@
 import React, {useState} from 'react';
+import {useHistory} from 'react-router-dom'
 import { logInUser } from '../api/requests';
 import Loginwelcome from './Loginwelcome';
 
 
 
 const Login = (props) => {
-    const setToken = props.setToken;
+    const { setToken } = props
    
     const [loginUsername, setLoginUsername] = useState("");
     const [loginPassword, setLoginPassword] = useState("");
     const [loggedIn, setLoggedIn] = useState(false);
 
-   
     
+    const history = useHistory()
+   
 
     const otherOnSubmitHandler = async (event) => {
         // console.log("onSubmitHandler() in Login called");
@@ -22,16 +24,22 @@ const Login = (props) => {
          console.log("token",token, message)
          setToken(token);
          window.localStorage.setItem('token', token);
-
-         setLoginUsername("");
-         setLoginPassword("");
-     }
+         if (token) {
+            handleLogin()
+         }
+         }
 
     
      const handleLogin = () => {
         setLoggedIn(true)
-        setTimeout(() => {setLoggedIn(false)}, "4000");
-     }
+        setTimeout(() => {
+            setLoggedIn(false)
+            setLoginUsername("");
+            setLoginPassword("");
+            history.push('/')
+        }, "4000");
+       
+    }
 
     return (<>
         <form className="login-form" onSubmit={otherOnSubmitHandler}>
@@ -57,7 +65,7 @@ const Login = (props) => {
                     required
                     onChange={(event) => { setLoginPassword(event.target.value); } } />
             </div>
-            <button className="submit-form" type="submit" onClick={handleLogin}>Submit</button>
+            <button className="submit-form" type="submit" >Submit</button>
             <div>
                 {loggedIn && <Loginwelcome loginUsername = {loginUsername} />}
             </div>
