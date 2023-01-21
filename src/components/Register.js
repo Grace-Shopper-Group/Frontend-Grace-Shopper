@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import { registerUser, logInUser } from '../api/requests';
-import {Registerwelcome} from './Registerwelcome';
+import Registerwelcome from './Registerwelcome';
 
 
 const Register = (props) => {
@@ -26,7 +26,7 @@ const Register = (props) => {
    
         const handleRegister = () => {
         setRegistered(true);
-        setTimeout(() => {setRegistered(false)}, "2000");
+        setTimeout(() => {setRegistered(false)}, "4000");
      }
 
     
@@ -54,7 +54,7 @@ const Register = (props) => {
         </div>
         <button className="submit-form" type="submit" onClick={handleRegister}>Submit</button>
         <div>
-            {/* {registered && <Registerwelcome />} */}
+            {registered && <Registerwelcome />}
         </div>
 
         {/*register*/}

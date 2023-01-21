@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import { logInUser } from '../api/requests';
-import {Loginwelcome} from './Loginwelcome';
+import Loginwelcome from './Loginwelcome';
 
 
 
@@ -30,7 +30,7 @@ const Login = (props) => {
     
      const handleLogin = () => {
         setLoggedIn(true)
-        setTimeout(() => {setLoggedIn(false)}, "2000");
+        setTimeout(() => {setLoggedIn(false)}, "4000");
      }
 
     return (<>
@@ -59,7 +59,7 @@ const Login = (props) => {
             </div>
             <button className="submit-form" type="submit" onClick={handleLogin}>Submit</button>
             <div>
-                {/* {loggedIn && <Loginwelcome />} */}
+                {loggedIn && <Loginwelcome loginUsername = {loginUsername} />}
             </div>
 
             {/*login*/}
