@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import { registerUser, logInUser } from '../api/requests';
-import {Registerwelcome} from './Registerwelcome';
+import {useHistory} from 'react-router-dom'
+import Registerwelcome from './Registerwelcome';
 
 
 const Register = (props) => {
@@ -9,24 +10,31 @@ const Register = (props) => {
     const [password, setPassword] = useState("");
     const [registered, setRegistered] = useState(false);
 
+    const history = useHistory()
    
 
     const onSubmitHandler = async (event) => {
         console.log("onSubmitHandler() called");
         event.preventDefault();
         const {error, token, message, user} = await registerUser(username, password);
-        
         setToken(token);
         window.localStorage.setItem('token', token);
-
-        setUsername("");
-        setPassword("");
+        if(token){
+        handleRegister()
+        }
+        else {alert(` The username ${username} is already registered` )}
+        
     }
 
    
         const handleRegister = () => {
         setRegistered(true);
-        setTimeout(() => {setRegistered(false)}, "2000");
+        setTimeout(() => {
+            setRegistered(false)
+            setUsername("");
+            setPassword("");
+            history.push('/login')
+        }, "4000");
      }
 
     
@@ -52,9 +60,9 @@ const Register = (props) => {
                 required
                 onChange={(event) => { setPassword(event.target.value); } } />
         </div>
-        <button className="submit-form" type="submit" onClick={handleRegister}>Submit</button>
+        <button className="submit-form" type="submit">Submit</button>
         <div>
-            {/* {registered && <Registerwelcome />} */}
+            {registered && <Registerwelcome username = {username} />}
         </div>
 
         {/*register*/}

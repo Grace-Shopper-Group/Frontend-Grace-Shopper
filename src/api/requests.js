@@ -30,7 +30,7 @@ export const apiCall = async (endpoint, defaultOptions= {}) => {
       const response = await fetch(`${BASEURL}/${endpoint}`, options);
     
       const result = await response.json();
-      console.log(result);
+      
       return result;
   }
 
@@ -56,15 +56,15 @@ export const apiCall = async (endpoint, defaultOptions= {}) => {
       const {user, message, token, error} = await apiCall('users/register', {token: null, method: "POST", body: { username: username,
       password: password}} );
       if (!error) {
-    //    console.log(username, data.token)
+   
         return {
           error: null,
           token: token,
-          mesage: message,
+          message: message,
           user: user
         }
       } else {
-       // console.log("no success in registerUser()", error);
+        console.log("no success in registerUser()", error);
         return {
           error: error.message,
           token: null,
@@ -83,20 +83,21 @@ export const apiCall = async (endpoint, defaultOptions= {}) => {
   }
 
   export const logInUser = async (username, password) => {
-    
+      console.log ("hi")
       const {user, message, token, error} = await apiCall('users/login', {token: null, method: "Post", body: {username: username,
       password: password}} );
+      
       if (!error) {
-       // console.log(username, data.token)
+       console.log (message, user)
         return {
           error: null,
           token: token,
-          mesage: message,
+          message: message,
           user: user
         }
       } else {
         alert("Incorrect User Credentials");
-       // console.log("no success in registerUser()", error);
+        console.log("no success in logInUser", error);
         return {
           error: error.message,
           token: null,

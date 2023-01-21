@@ -13,7 +13,7 @@ const App = () => {
     const [user, setUser] = useState([]);
     const [category, setCategory] = useState("athletic");
     const [featureProductId, setFeatureProductId] = useState();
-
+    
 
 
 
@@ -47,7 +47,7 @@ const App = () => {
 
           <Route path = "/" exact><Home allProducts = {allProducts} setCategory = {setCategory}></Home></Route>
           <Route path = "/products"><Products allProducts={allProducts} user={user} token={token}></Products></Route>
-          <Route path = "/login"><Login setToken = {setToken}></Login></Route>
+          <Route path = "/login"><Login setToken = {setToken} ></Login></Route>
           <Route path = "/register"><Register setToken = {setToken}></Register></Route>
           {/* <Route path = "/register"><Logout></Logout></Route> */}
           <Route path = "/admindash"> <Admindash token = {token} allProducts={allProducts}></Admindash></Route>
