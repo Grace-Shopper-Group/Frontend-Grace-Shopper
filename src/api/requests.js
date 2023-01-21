@@ -107,3 +107,52 @@ export const apiCall = async (endpoint, defaultOptions= {}) => {
       }
     
     }
+
+    export const changeProduct = async (tokenString, productId, brand, description, category, price, img) => {
+      console.log("productIdAPI", productId)
+      const {product, message, token, error} = await apiCall(`products/${productId}`, {token: tokenString, method: "Patch", body: {brand: brand, description: description, category: category, price: price, img: img}} );
+      
+      if (!error) {
+       console.log (message, product)
+        return {
+          error: null,
+          token: token,
+          message: message,
+          product: product
+        }
+      } else {
+        alert("Something isn't right");
+        console.log("no success in changeProduct", error);
+        return {
+          error: error.message,
+          token: null,
+          message: null,
+          product: null
+        }
+      }
+    
+    }
+
+    export const addProduct = async (brand, description, category, price, img) => {
+      const {product, message, token, error} = await apiCall('products', {token: null, method: "Post", body: {brand: brand, description: description, category: category, price: price, img: img}} );
+      
+      if (!error) {
+       console.log (message, product)
+        return {
+          error: null,
+          token: token,
+          message: message,
+          product: product
+        }
+      } else {
+        alert("Something isn't right");
+        console.log("no success in addProduct", error);
+        return {
+          error: error.message,
+          token: null,
+          message: null,
+          product: null
+        }
+      }
+    
+    }

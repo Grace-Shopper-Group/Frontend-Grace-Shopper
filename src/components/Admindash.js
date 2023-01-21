@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { EditProduct, DeleteProduct } from "./Index";
 
 const AdminDash = (props) => {
-  const { user, tokenString, allProducts } = props;
+  const { user, token, allProducts } = props;
   const [currentProduct, setCurrentProduct] = useState(null);
   const [editMode, setEditMode] = useState(false);
   const [deleteMode, setDeleteMode] = useState(false);
@@ -146,7 +146,9 @@ const handleClear = (e) => {
                    product={product}
                    editingProduct={currentProduct}
                    editMode={editMode}
+                   token={token}
                    setEditMode={setEditMode}>
+                    
                    </EditProduct>
                    {((product.id !== currentProduct.id) ? (
                         <div>

@@ -6,16 +6,11 @@ const DeleteProduct = (props) => {
 
 if (product.id === currentProduct.id){
     return (
-        <>
+        <div className="content">
         <h3>{`Are you sure you want to delete ${currentProduct.description}?`}</h3>
-        <br></br>
-        <div className="ui input">
-            <input placeholder="Enter Admin Password"></input>
-        </div>
-        
         <button className="ui red button" id="mediumButtons" onClick={()=>{handleDelete}}>Yes, I'm sure</button>
         <button className="ui basic red button" id="mediumButtons" onClick={() => {setDeleteMode(false)}}>Close</button>
-        </>
+        </div>
         )
     }
 
