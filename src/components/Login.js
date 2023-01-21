@@ -27,6 +27,7 @@ const Login = (props) => {
          if (token) {
             handleLogin()
          }
+         else {alert(` Incorrect username or password` )}
          }
 
     

@@ -19,7 +19,10 @@ const Register = (props) => {
         const {error, token, message, user} = await registerUser(username, password);
         setToken(token);
         window.localStorage.setItem('token', token);
+        if(token){
         handleRegister()
+        }
+        else {alert(` The username ${username} is already registered` )}
         
     }
 
