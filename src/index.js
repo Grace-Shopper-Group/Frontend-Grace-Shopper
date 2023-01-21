@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Route, Switch, Link} from 'react-router-dom';
 import { Login, Register, Home, Products, Category, Admindash, Feature} from './components/Index';
 import {fetchProducts} from './api/requests.js';
-import "./index.css"
 
 const App = () => {
   
@@ -36,12 +35,11 @@ const App = () => {
     <BrowserRouter>
 
 <div id = "container">
-<div className= "nav-bar-title">Sole Quest Men's Shoes</div>
     <div id = "nav-bar"> 
-    <Link id="Home" to="/">  <img src="https://img.freepik.com/premium-vector/shoes-logo-template-design-vector_316488-1463.jpg?w=1060" /></Link>
-    <Link id="Products" to = "/products">Products</Link>
-    <Link id="Register" to = "/register">Register</Link>
-    <Link id="Login" to = "/login">Login</Link>
+    <div className= "nav-bar-title">Sole Quest Men's Shoes</div>
+    <Link to = "/products">Products</Link>
+    <Link to = "/register">Register</Link>
+    <Link to = "/login">Login</Link>
     {/* { token && user.isAdmin === true ?*/} <Link to = "/admindash">Admin</Link>
     {token ? <Link to = "/logout">Logout</Link> : null }
     </div>
