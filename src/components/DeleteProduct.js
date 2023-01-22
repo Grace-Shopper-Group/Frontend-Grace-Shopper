@@ -1,14 +1,26 @@
 import React, { useState } from "react";
+import { destroyProduct } from "../api/requests";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 const DeleteProduct = (props) => {
   const { deleteMode, setDeleteMode, product, currentProduct } = props;
-//   console.log(deleteMode, product, currentProduct)
+  console.log("currentProduct id", currentProduct.id)
+  const history = useHistory()
+
+const handleDelete = async (e) => {
+    const deletedProduct = await destroyProduct(currentProduct.id)
+    console.log("deletedProduct", deletedProduct)
+    setDeleteMode(false)
+    window.location.reload();
+
+    
+}
 
 if (product.id === currentProduct.id){
     return (
         <div className="content">
         <h3>{`Are you sure you want to delete ${currentProduct.description}?`}</h3>
-        <button className="ui red button" id="mediumButtons" onClick={()=>{handleDelete}}>Yes, I'm sure</button>
+        <button className="ui red button" id="mediumButtons" onClick={handleDelete}>Yes, I'm sure</button>
         <button className="ui basic red button" id="mediumButtons" onClick={() => {setDeleteMode(false)}}>Close</button>
         </div>
         )

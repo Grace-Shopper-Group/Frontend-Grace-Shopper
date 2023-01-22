@@ -14,6 +14,7 @@ const App = () => {
   const [user, setUser] = useState([]);
   const [category, setCategory] = useState("athletic");
   const [featureProductId, setFeatureProductId] = useState();
+  const [isAdmin, setIsAdmin] = useState(false)
 
   const logOut = () => {
     setToken(null);
@@ -53,7 +54,7 @@ const App = () => {
           <Route path="/login"><Login setToken={setToken} ></Login></Route>
           <Route path="/register"><Register setToken={setToken}></Register></Route>
           {/* <Route path = "/register"><Logout></Logout></Route> */}
-          <Route path="/admindash"> <Admindash token={token} allProducts={allProducts}></Admindash></Route>
+          <Route path="/admindash"> <Admindash token={token} allProducts={allProducts} isAdmin={isAdmin} setIsAdmin={setIsAdmin}></Admindash></Route>
           <Route path="/category"> <Category token={token} user={user} category={category}
             setCategory={setCategory} allProducts={allProducts} setFeatureProductId={setFeatureProductId}></Category></Route>
           <Route path="/feature"> <Feature token={token} user={user} featureProductId={featureProductId}

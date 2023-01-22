@@ -137,14 +137,14 @@ export const apiCall = async (endpoint, defaultOptions = {}) => {
     
     }
 
-    export const addProduct = async (brand, description, category, price, img) => {
+    export const createProduct = async (brand, description, category, price, img) => {
       const {product, message, token, error} = await apiCall('products', {token: null, method: "Post", body: {brand: brand, description: description, category: category, price: price, img: img}} );
       
       if (!error) {
        console.log (message, product)
         return {
           error: null,
-          token: token,
+          token: null,
           message: message,
           product: product
         }
@@ -160,3 +160,22 @@ export const apiCall = async (endpoint, defaultOptions = {}) => {
       }
     
     }
+
+    export const destroyProduct = async (currentProductId) => {
+      const result = await apiCall((`products/${currentProductId}`), {token: null, method: "DELETE", body: null} );
+      console.log("result", result)
+      if (!result.error) {
+       console.log (result.message, result.product)
+        return {
+          error: null,
+          token: null
+        }
+      } else {
+        alert("Something isn't right");
+        console.log("no success in destroyProduct", error);
+        return {
+          error: error.message,
+          token: null,
+          message: null
+        }
+      }}

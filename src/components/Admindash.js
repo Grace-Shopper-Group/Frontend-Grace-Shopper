@@ -1,24 +1,22 @@
 import React, { useState } from "react";
-import { EditProduct, DeleteProduct } from "./Index";
+import { EditProduct, DeleteProduct} from "./Index";
 import { Label } from "semantic-ui-react";
+import { createProduct } from "../api/requests";
 
 
 const AdminDash = (props) => {
-  const { user, token, allProducts } = props;
-  const [currentProduct, setCurrentProduct] = useState(null);
-  const [editMode, setEditMode] = useState(false);
-  const [deleteMode, setDeleteMode] = useState(false);
-  const [isAdmin, setIsAdmin] = useState(false);
-  const [newProduct, setNewProduct] = useState({
-    brand: '',
-    description: '',
-    imageUrl: '',
-    category: '',
-    price: ''
-});
+    const { user, token, allProducts, isAdmin, setIsAdmin } = props;
+    const [currentProduct, setCurrentProduct] = useState(null);
+    const [editMode, setEditMode] = useState(false);
+    const [deleteMode, setDeleteMode] = useState(false);
+    const [newBrand, setNewBrand] = useState('')
+    const [newDesc, setNewDesc] = useState('')
+    const [newImg, setNewImg] = useState('')
+    const [newCategory, setNewCategory] = useState('')
+    const [newPrice, setNewPrice] = useState('')
 
 const [inputPass, setInputPass] = useState('')
-const adminPass = "adminPass2023"
+const adminPass = "adminpass"
 
 if(!token){
 console.log(token)
@@ -26,7 +24,6 @@ console.log(token)
     <div>Please sign in as Admin</div>
     </div>
 }
-console.log(isAdmin)
 
 if(isAdmin === false){
     return <div className="dashboard">
@@ -49,46 +46,50 @@ if(allProducts.length === 0){
      </div>
      </>)}
 
-const handleChange = (e) => {
-    e.preventDefault()
+// const handleChange = (e) => {
+//     e.preventDefault()
 
-    if(e.target.name === "brand"){
-        const brandNew = e.target.value;
-        setNewProduct({brand: brandNew})
-    };
+//     if(e.target.name === "brand"){
+//         const brandNew = e.target.value;
+//         setNewProduct({brand: brandNew})
+//     };
 
-    if (e.target.name === "description"){
-        const descNew = e.target.value;
-        setNewProduct({description: descNew}) 
-    };
+//     if (e.target.name === "description"){
+//         const descNew = e.target.value;
+//         setNewProduct({description: descNew}) 
+//     };
 
-    if (e.target.name === "imageUrl"){
-        const imgNew = e.target.value;
-        setNewProduct({imageUrl: imgNew}) 
-    };
+//     if (e.target.name === "imageUrl"){
+//         const imgNew = e.target.value;
+//         setNewProduct({imageUrl: imgNew}) 
+//     };
 
-    if (e.target.name === "category"){
-        const categoryNew = e.target.value;
-        setNewProduct({category: categoryNew}) 
-    };
+//     if (e.target.name === "category"){
+//         const categoryNew = e.target.value;
+//         setNewProduct({category: categoryNew}) 
+//     };
 
-    if (e.target.name === "price"){
-        const priceNew = e.target.value;
-        setNewProduct({price: priceNew})
-    };
-}
+//     if (e.target.name === "price"){
+//         const priceNew = e.target.value;
+//         setNewProduct({price: priceNew})
+//     };
+// }
 
 const handleClear = (e) => {
     e.preventDefault()
 
-    setNewProduct({
-        brand: '',
-        description: '',
-        imageUrl: '',
-        category: '',
-        price: ''
-    })
+    setNewDesc('')
+    setNewBrand('')
+    setNewImg('')
+    setNewCategory('')
+    setNewPrice('')
 }
+const handleClick = async (e) => {
+    console.log(newBrand, newDesc, newCategory, newPrice, newImg)
+      const newProduct = await createProduct(newBrand, newDesc, newCategory, newPrice, newImg)
+      console.log("newProduct", changedProduct)
+      handleClear(e)
+  }
 
     return (<>
         <div className="dashboard">
@@ -100,50 +101,51 @@ const handleClear = (e) => {
             <h2 className="ui grey header">CREATE PRODUCT</h2>
             <p>Please fill in all information.</p>
             <br></br>
+            <form onSubmit={handleClick}>
             <div className="ui input">
                 
             <input 
                 type="text"
-                value={newProduct.description}
+                value={newDesc}
                 name="description"
                 placeholder="description"
-                onChange={handleChange}
+                onChange={(e)=>{setNewDesc(e.target.value)}}
             />
             </div>
             <div className="ui input">
             <input
                 type="text"
-                value={newProduct.brand}
+                value={newBrand}
                 name="brand"
                 placeholder="brand"
-                onChange={handleChange}
+                onChange={(e)=>{setNewBrand(e.target.value)}}
             />
             </div>
             <div className="ui input">
             <input
                 type="text"
-                value={newProduct.imageUrl}
+                value={newImg}
                 name="imageUrl"
                 placeholder="image url"
-                onChange={handleChange}
+                onChange={(e)=>{setNewImg(e.target.value)}}
             />
             </div>
             <div className="ui input">
             <input
                 type="text"
-                value={newProduct.category}
+                value={newCategory}
                 name="category"
                 placeholder="category"
-                onChange={handleChange}
+                onChange={(e)=>{setNewCategory(e.target.value)}}
             />
             </div>
             <div className="ui input">
             <input
                 type="number"
-                value={newProduct.price}
+                value={newPrice}
                 name="price"
                 placeholder="price"
-                onChange={handleChange}
+                onChange={(e)=>{setNewPrice(e.target.value)}}
             />
             </div>
 
@@ -152,13 +154,14 @@ const handleClear = (e) => {
             <br></br>
             <span>
             <button className="ui red button" id="smallButtons" onClick={handleClear}>Clear</button>
-            <button className="ui green button" id="smallButtons">Create</button>
+            <button className="ui green button" id="smallButtons" type="submit">Create</button>
             </span>
            
            
             </> ) : "Currently making changes"} 
-
+            </form>
             </div>
+            
             
             
 
