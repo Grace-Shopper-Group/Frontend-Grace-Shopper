@@ -34,11 +34,11 @@ const Register = (props) => {
             setUsername("");
             setPassword("");
             history.push('/login')
-        }, "4000");
+        }, "2000");
      }
 
     
-    return (<><form className="login-form" onSubmit={onSubmitHandler}>
+    return (<><form className="ui form" onSubmit={onSubmitHandler}>
         <h1>SignUp Form</h1>
         <div className="field">
             <label>Username</label>
@@ -60,7 +60,7 @@ const Register = (props) => {
                 required
                 onChange={(event) => { setPassword(event.target.value); } } />
         </div>
-        <button className="submit-form" type="submit">Submit</button>
+        <button className="ui button" type="submit">Submit</button>
         <div>
             {registered && <Registerwelcome username = {username} />}
         </div>
