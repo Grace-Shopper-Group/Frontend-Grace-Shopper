@@ -207,7 +207,7 @@ const handleClick = async (e) => {
                         <h2 className="header">{product.brand}</h2>
                         <img className="ui small image" src={product.imageUrl}></img>
                         <h3>Category: {product.category}</h3>
-                        <h5>Original Price: ${Math.floor(product.price * 2)}</h5>
+                        <h5 className="originalPrice">Original Price: ${Math.floor(product.price * 2)}</h5>
                         <h3 className="ui red header">Now: ${product.price}</h3>
                         <button className="ui basic red button" id="smallButtons" onClick={() => {
                         setCurrentProduct(product);

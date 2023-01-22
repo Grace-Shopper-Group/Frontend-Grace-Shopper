@@ -27,14 +27,15 @@ const categoryProducts = allProducts.filter((product)=>{ return product.category
                 {categoryProducts.map((product) => {
                     return (
                         <div key={product.id} className="ui card">
+                        <div className="content">
                             <div className="category-content">
-                                <h1 className="category-description"  onClick={() => handleClick(product.id)}>{product.description}</h1>
-                                <h2 className="category-brand">{product.brand}</h2>
-                                <img className="category-image" onClick={() => handleClick(product.id)} src={product.imageUrl}></img>
-        
-                                <h3>Price: ${product.price}</h3>
-                                <button className="category-cart-button" onClick={() => {/* add to cart function */}} >add to cart</button>
-                            
+                                <h1 className="description"  onClick={() => handleClick(product.id)}>{product.description}</h1>
+                                <h2 className="header">{product.brand}</h2>
+                                <img className="ui small image" onClick={() => handleClick(product.id)} src={product.imageUrl}></img>
+                                <h5 className="originalPrice">Original Price: ${Math.floor(product.price * 2)}</h5>
+                                <h3 className="ui red header">Now: ${product.price}</h3>
+                                <button className="ui button" onClick={() => {/* add to cart function */}} >add to cart</button>
+                            </div>
                             </div>
                         </div>
                     );

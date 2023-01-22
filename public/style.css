@@ -239,3 +239,7 @@ align-items: center;
 
 }
 
+.originalPrice{
+  text-decoration: line-through;
+}
+

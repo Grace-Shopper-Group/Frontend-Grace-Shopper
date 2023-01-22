@@ -10,7 +10,6 @@ import { changeProduct } from "../api/requests";
     const [editedImg, setEditedImg] = useState(product.imageUrl)
     const [editedCategory, setEditedCategory] = useState(product.category)
     const [editedPrice, setEditedPrice] = useState(product.price)
-    // console.log(editedProduct)
 
     const handleClick = async (e) => {
       console.log(token, editingProduct.id, editedBrand, editedDesc, editedCategory, editedPrice, editedImg)
@@ -93,7 +92,7 @@ import { changeProduct } from "../api/requests";
         <h2 className="header">{product.brand}</h2>
         <img className="ui small image" src={product.imageUrl}></img>
         <h3>Category: {product.category}</h3>
-        <h5>Original Price: ${Math.floor(product.price * 2)}</h5>
+        <h5 className="originalPrice">Original Price: ${Math.floor(product.price * 2)}</h5>
         <h3 className="ui red header">Now: ${product.price}</h3>
     </>
   }
