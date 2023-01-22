@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import { EditProduct, DeleteProduct } from "./Index";
+import { Label } from "semantic-ui-react";
+
 
 const AdminDash = (props) => {
   const { user, token, allProducts } = props;
   const [currentProduct, setCurrentProduct] = useState(null);
   const [editMode, setEditMode] = useState(false);
   const [deleteMode, setDeleteMode] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
   const [newProduct, setNewProduct] = useState({
     brand: '',
     description: '',
@@ -13,6 +16,31 @@ const AdminDash = (props) => {
     category: '',
     price: ''
 });
+
+const [inputPass, setInputPass] = useState('')
+const adminPass = "adminPass2023"
+
+if(!token){
+console.log(token)
+    return <div className="dashboard">
+    <div>Please sign in as Admin</div>
+    </div>
+}
+console.log(isAdmin)
+
+if(isAdmin === false){
+    return <div className="dashboard">
+    <form className="ui form" onSubmit={(e) => {if(inputPass === adminPass){
+        console.log(e.target.value)
+        setIsAdmin(true)}}}>
+        <div className="ui field">
+        <Label>Please enter password</Label>
+        <input placeholder="Admin Password" onChange={(event) => {setInputPass(event.target.value)}}></input>
+        </div>
+        <button type="submit" className="ui blue button">Submit</button>
+    </form>
+    </div>
+}
 
 if(allProducts.length === 0){
    return (<>
@@ -176,7 +204,8 @@ const handleClear = (e) => {
                         <h2 className="header">{product.brand}</h2>
                         <img className="ui small image" src={product.imageUrl}></img>
                         <h3>Category: {product.category}</h3>
-                        <h3>Price: ${product.price}</h3>
+                        <h5>Original Price: ${Math.floor(product.price * 2)}</h5>
+                        <h3 className="ui red header">Now: ${product.price}</h3>
                         <button className="ui basic red button" id="smallButtons" onClick={() => {
                         setCurrentProduct(product);
                         setEditMode(true);}}>Edit</button>

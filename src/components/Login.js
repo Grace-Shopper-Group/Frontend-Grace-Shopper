@@ -38,7 +38,7 @@ const Login = (props) => {
             setLoginUsername("");
             setLoginPassword("");
             history.push('/')
-        }, "4000");
+        }, "1000");
        
     }
 

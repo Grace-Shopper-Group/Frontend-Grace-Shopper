@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Route, Switch, Link } from 'react-router-dom';
-import { Login, Register, Home, Products, Category, Admindash, Feature } from './Components/Index';
+import { Login, Register, Home, Products, Category, Admindash, Feature } from './components/Index';
 import { fetchProducts } from './api/requests.js';
 import "./index.css"
 
@@ -15,8 +15,10 @@ const App = () => {
   const [category, setCategory] = useState("athletic");
   const [featureProductId, setFeatureProductId] = useState();
 
-
-
+  const logOut = () => {
+    setToken(null);
+    setUser(null);
+};
 
   useEffect(() => {
     const getAllProducts = async () => {
@@ -40,10 +42,9 @@ const App = () => {
         <div id="nav-bar">
           <Link id="Home" to="/">  <img src="https://img.freepik.com/premium-vector/shoes-logo-template-design-vector_316488-1463.jpg?w=1060" /></Link>
           <Link id="Products" to="/products">Products</Link>
-          <Link id="Register" to="/register">Register</Link>
-          <Link id="Login" to="/login">Login</Link>
-          {/* { token && user.isAdmin === true ?*/} <Link to="/admindash">Admin</Link>
-          {token ? <Link to="/logout">Logout</Link> : null}
+          <Link id="Admin" to="/admindash">Admin</Link>
+          {!token ? <Link id="Login" to="/login">Login</Link> : <Link id="Logout" to="/" onClick={logOut}>Logout</Link>}
+          {!token ? <Link id="Register" to="/register">Register</Link> : null}
         </div>
         <div id="main-section">
 

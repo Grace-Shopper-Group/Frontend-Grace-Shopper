@@ -13,10 +13,10 @@ import { changeProduct } from "../api/requests";
     // console.log(editedProduct)
 
     const handleClick = async (e) => {
-      e.preventDefault()
       console.log(token, editingProduct.id, editedBrand, editedDesc, editedCategory, editedPrice, editedImg)
         const changedProduct = await changeProduct(token, editingProduct.id, editedBrand, editedDesc, editedCategory, editedPrice, editedImg)
-        console.log(changedProduct)
+        console.log("changedProduct", changedProduct)
+        setEditMode(false)
     }
     
     if (editMode === true && product.id === editingProduct.id) {
@@ -93,7 +93,8 @@ import { changeProduct } from "../api/requests";
         <h2 className="header">{product.brand}</h2>
         <img className="ui small image" src={product.imageUrl}></img>
         <h3>Category: {product.category}</h3>
-        <h3>Price: ${product.price}</h3>
+        <h5>Original Price: ${Math.floor(product.price * 2)}</h5>
+        <h3 className="ui red header">Now: ${product.price}</h3>
     </>
   }
 
