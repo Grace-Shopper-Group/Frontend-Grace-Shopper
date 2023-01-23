@@ -179,3 +179,27 @@ export const apiCall = async (endpoint, defaultOptions = {}) => {
           message: null
         }
       }}
+
+      export const addToCart = async (token, userId, productId, quantity) => {
+        const {cart, message, token, error} = await apiCall('cart', {token: token, method: "POST", body: {userId: userId, productId: productId, quantity: quantity}});
+        
+        if (!error) {
+         console.log (message, product)
+          return {
+            error: null,
+            token: null,
+            message: message,
+            cart: cart
+          }
+        } else {
+          alert("Something isn't right with addToCart request");
+          console.log("no success in addToCart", error);
+          return {
+            error: error.message,
+            token: null,
+            message: null,
+            cart: null
+          }
+        }
+      
+      }
