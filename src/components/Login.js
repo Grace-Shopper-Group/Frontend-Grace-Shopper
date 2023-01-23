@@ -38,12 +38,12 @@ const Login = (props) => {
             setLoginUsername("");
             setLoginPassword("");
             history.push('/')
-        }, "4000");
+        }, "2000");
        
     }
 
     return (<>
-        <form className="login-form" onSubmit={otherOnSubmitHandler}>
+        <form className="ui form" onSubmit={otherOnSubmitHandler}>
             <h1>Login Form</h1>
             <div className="field">
                 <label>Username</label>

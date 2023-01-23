@@ -1,18 +1,43 @@
 import React, { useState } from "react";
-import { EditProduct, DeleteProduct } from "./Index";
+import { EditProduct, DeleteProduct} from "./Index";
+import { Label } from "semantic-ui-react";
+import { createProduct } from "../api/requests";
+
 
 const AdminDash = (props) => {
-  const { user, tokenString, allProducts } = props;
-  const [currentProduct, setCurrentProduct] = useState(null);
-  const [editMode, setEditMode] = useState(false);
-  const [deleteMode, setDeleteMode] = useState(false);
-  const [newProduct, setNewProduct] = useState({
-    brand: '',
-    description: '',
-    imageUrl: '',
-    category: '',
-    price: ''
-});
+    const { user, token, allProducts, isAdmin, setIsAdmin } = props;
+    const [currentProduct, setCurrentProduct] = useState(null);
+    const [editMode, setEditMode] = useState(false);
+    const [deleteMode, setDeleteMode] = useState(false);
+    const [newBrand, setNewBrand] = useState('')
+    const [newDesc, setNewDesc] = useState('')
+    const [newImg, setNewImg] = useState('')
+    const [newCategory, setNewCategory] = useState('')
+    const [newPrice, setNewPrice] = useState('')
+
+const [inputPass, setInputPass] = useState('')
+const adminPass = "adminpass"
+
+if(!token){
+console.log(token)
+    return <div className="dashboard">
+    <div>Please sign in as Admin</div>
+    </div>
+}
+
+if(isAdmin === false){
+    return <div className="dashboard">
+    <form className="ui form" onSubmit={(e) => {if(inputPass === adminPass){
+        console.log(e.target.value)
+        setIsAdmin(true)}}}>
+        <div className="ui field">
+        <Label>Please enter password</Label>
+        <input placeholder="Admin Password" onChange={(event) => {setInputPass(event.target.value)}}></input>
+        </div>
+        <button type="submit" className="ui blue button">Submit</button>
+    </form>
+    </div>
+}
 
 if(allProducts.length === 0){
    return (<>
@@ -21,46 +46,50 @@ if(allProducts.length === 0){
      </div>
      </>)}
 
-const handleChange = (e) => {
-    e.preventDefault()
+// const handleChange = (e) => {
+//     e.preventDefault()
 
-    if(e.target.name === "brand"){
-        const brandNew = e.target.value;
-        setNewProduct({brand: brandNew})
-    };
+//     if(e.target.name === "brand"){
+//         const brandNew = e.target.value;
+//         setNewProduct({brand: brandNew})
+//     };
 
-    if (e.target.name === "description"){
-        const descNew = e.target.value;
-        setNewProduct({description: descNew}) 
-    };
+//     if (e.target.name === "description"){
+//         const descNew = e.target.value;
+//         setNewProduct({description: descNew}) 
+//     };
 
-    if (e.target.name === "imageUrl"){
-        const imgNew = e.target.value;
-        setNewProduct({imageUrl: imgNew}) 
-    };
+//     if (e.target.name === "imageUrl"){
+//         const imgNew = e.target.value;
+//         setNewProduct({imageUrl: imgNew}) 
+//     };
 
-    if (e.target.name === "category"){
-        const categoryNew = e.target.value;
-        setNewProduct({category: categoryNew}) 
-    };
+//     if (e.target.name === "category"){
+//         const categoryNew = e.target.value;
+//         setNewProduct({category: categoryNew}) 
+//     };
 
-    if (e.target.name === "price"){
-        const priceNew = e.target.value;
-        setNewProduct({price: priceNew})
-    };
-}
+//     if (e.target.name === "price"){
+//         const priceNew = e.target.value;
+//         setNewProduct({price: priceNew})
+//     };
+// }
 
 const handleClear = (e) => {
     e.preventDefault()
 
-    setNewProduct({
-        brand: '',
-        description: '',
-        imageUrl: '',
-        category: '',
-        price: ''
-    })
+    setNewDesc('')
+    setNewBrand('')
+    setNewImg('')
+    setNewCategory('')
+    setNewPrice('')
 }
+const handleClick = async (e) => {
+    console.log(newBrand, newDesc, newCategory, newPrice, newImg)
+      const newProduct = await createProduct(newBrand, newDesc, newCategory, newPrice, newImg)
+      console.log("newProduct", changedProduct)
+      handleClear(e)
+  }
 
     return (<>
         <div className="dashboard">
@@ -72,50 +101,51 @@ const handleClear = (e) => {
             <h2 className="ui grey header">CREATE PRODUCT</h2>
             <p>Please fill in all information.</p>
             <br></br>
+            <form onSubmit={handleClick}>
             <div className="ui input">
                 
             <input 
                 type="text"
-                value={newProduct.description}
+                value={newDesc}
                 name="description"
                 placeholder="description"
-                onChange={handleChange}
+                onChange={(e)=>{setNewDesc(e.target.value)}}
             />
             </div>
             <div className="ui input">
             <input
                 type="text"
-                value={newProduct.brand}
+                value={newBrand}
                 name="brand"
                 placeholder="brand"
-                onChange={handleChange}
+                onChange={(e)=>{setNewBrand(e.target.value)}}
             />
             </div>
             <div className="ui input">
             <input
                 type="text"
-                value={newProduct.imageUrl}
+                value={newImg}
                 name="imageUrl"
                 placeholder="image url"
-                onChange={handleChange}
+                onChange={(e)=>{setNewImg(e.target.value)}}
             />
             </div>
             <div className="ui input">
             <input
                 type="text"
-                value={newProduct.category}
+                value={newCategory}
                 name="category"
                 placeholder="category"
-                onChange={handleChange}
+                onChange={(e)=>{setNewCategory(e.target.value)}}
             />
             </div>
             <div className="ui input">
             <input
                 type="number"
-                value={newProduct.price}
+                value={newPrice}
                 name="price"
                 placeholder="price"
-                onChange={handleChange}
+                onChange={(e)=>{setNewPrice(e.target.value)}}
             />
             </div>
 
@@ -124,13 +154,14 @@ const handleClear = (e) => {
             <br></br>
             <span>
             <button className="ui red button" id="smallButtons" onClick={handleClear}>Clear</button>
-            <button className="ui green button" id="smallButtons">Create</button>
+            <button className="ui green button" id="smallButtons" type="submit">Create</button>
             </span>
            
            
             </> ) : "Currently making changes"} 
-
+            </form>
             </div>
+            
             
             
 
@@ -146,7 +177,9 @@ const handleClear = (e) => {
                    product={product}
                    editingProduct={currentProduct}
                    editMode={editMode}
+                   token={token}
                    setEditMode={setEditMode}>
+                    
                    </EditProduct>
                    {((product.id !== currentProduct.id) ? (
                         <div>
@@ -174,7 +207,8 @@ const handleClear = (e) => {
                         <h2 className="header">{product.brand}</h2>
                         <img className="ui small image" src={product.imageUrl}></img>
                         <h3>Category: {product.category}</h3>
-                        <h3>Price: ${product.price}</h3>
+                        <h5 className="originalPrice">Original Price: ${Math.floor(product.price * 2)}</h5>
+                        <h3 className="ui red header">Now: ${product.price}</h3>
                         <button className="ui basic red button" id="smallButtons" onClick={() => {
                         setCurrentProduct(product);
                         setEditMode(true);}}>Edit</button>

@@ -14,8 +14,11 @@ const makeHeaders = (token) => {
   };
   
 
-export const apiCall = async (endpoint, defaultOptions= {}) => {
+export const apiCall = async (endpoint, defaultOptions = {}) => {
     const {token, method, body} = defaultOptions;
+
+    console.log("defaultOptions", defaultOptions)
+    console.log("endpoint", endpoint)
     
     const options = {
       mode: 'cors'
@@ -27,10 +30,12 @@ export const apiCall = async (endpoint, defaultOptions= {}) => {
     if (body) {
       options.body = JSON.stringify(body);
     }
+    console.log("options", options)
+    console.log("baseurl", BASEURL)
       const response = await fetch(`${BASEURL}/${endpoint}`, options);
-    
+    console.log("response apiCall",response , options)
       const result = await response.json();
-      
+      console.log("result", result)
       return result;
   }
 
@@ -107,3 +112,70 @@ export const apiCall = async (endpoint, defaultOptions= {}) => {
       }
     
     }
+
+    export const changeProduct = async (tokenString, productId, brand, description, category, price, img) => {
+      console.log("productIdAPI", productId, tokenString, brand)
+      const result = await apiCall((`products/${productId}`), {token: tokenString, method: "PATCH", body: {brand: brand, description: description, category: category, price: price, img: img}} );
+      console.log("result", result)
+      if (!result.error) {
+       console.log (result.message, result.product)
+        return {
+          error: null,
+          token: null,
+          product: result.product
+        }
+      } else {
+        alert("Something isn't right");
+        console.log("no success in changeProduct", error);
+        return {
+          error: error.message,
+          token: null,
+          message: null,
+          product: null
+        }
+      }
+    
+    }
+
+    export const createProduct = async (brand, description, category, price, img) => {
+      const {product, message, token, error} = await apiCall('products', {token: null, method: "Post", body: {brand: brand, description: description, category: category, price: price, img: img}} );
+      
+      if (!error) {
+       console.log (message, product)
+        return {
+          error: null,
+          token: null,
+          message: message,
+          product: product
+        }
+      } else {
+        alert("Something isn't right");
+        console.log("no success in addProduct", error);
+        return {
+          error: error.message,
+          token: null,
+          message: null,
+          product: null
+        }
+      }
+    
+    }
+
+    export const destroyProduct = async (currentProductId) => {
+      const result = await apiCall((`products/${currentProductId}`), {token: null, method: "DELETE", body: null} );
+      console.log("result", result)
+      if (!result.error) {
+       console.log (result.message, result.product)
+        return {
+          error: null,
+          token: null
+        }
+      } else {
+        alert("Something isn't right");
+        console.log("no success in destroyProduct", error);
+        return {
+          error: error.message,
+          token: null,
+          message: null
+        }
+      }}
