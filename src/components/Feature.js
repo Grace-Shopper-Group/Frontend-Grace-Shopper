@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-import {addToCart} from "../api/requests"
+import {addToCart, fetchCartByProductId, editCart} from "../api/requests"
 
 const Feature = (props) => {
-    const { user, token, allProducts,featureProductId, setFeatureProductId} = props
+    const { user, token, allProducts,featureProductId, setFeatureProductId,
+    itemsInCart, setItemsInCart} = props
     const [quantity, setQuantity] = useState(1)
 
     const history = useHistory()
@@ -17,11 +18,26 @@ const Feature = (props) => {
         history.push("/category")
     }
 
-    function handleAddToCart(id) {
-        console.log ("productId", id)
-        setFeatureProductId(id);
+    async function handleAddToCart(productId) {
+        document.getElementById(`quantitySelect-${productId}`).value = "1";
+        console.log ("productId", productId)
+        setFeatureProductId(productId);
 
-       
+        const cart = await fetchCartByProductId(token, productId)
+        console.log ("cart",cart)
+        
+        if (!cart.id){
+        const result = await addToCart(token, productId, quantity);
+        console.log ("addtocart result", result)
+        setItemsInCart(itemsInCart+quantity)
+        setQuantity(1)
+        }
+        else {
+            const editedCart = await editCart(token, cart.id, itemsInCart+quantity);
+            console.log ("editCart result", editedCart)
+            setItemsInCart(itemsInCart+quantity)
+            setQuantity(1)
+        }
         
         }
 
@@ -40,13 +56,11 @@ const featureProduct = allProducts.filter((product)=>{ return product.id === fea
                                 <h2 className="feature-brand"> {featureProduct[0].brand} </h2>
                                 <img className="feature-image" src={featureProduct[0].imageUrl}></img>
                                 <h3>Price: ${featureProduct[0].price}</h3>
-                                <span>
-                                <button className="feature-cart-button" onClick={() => {/* add to cart function */}} >add to cart</button>
-                                <button className="feature-cart-button" onClick={() => {clickedBack()}}>Back</button>
-                                </span>
+                                <button className="ui button" onClick={() => {handleAddToCart(featureProduct[0].id)}} >add to cart</button>
+                                <button className="ui button" onClick={() => {clickedBack()}}>Back</button>
                                 <span>
                                 <div>Qty</div>
-                                <select className="ui dropdown" 
+                                <select className="ui dropdown" id = {`quantitySelect-${featureProduct[0].id}`}
                                 onChange={e => {
                                     const selectedValue = e.target.value;
                                     console.log("selectedValue", selectedValue)
