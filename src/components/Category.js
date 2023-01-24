@@ -18,23 +18,26 @@ const Category = (props) => {
        
         }
     async function handleAddToCart(productId) {
+        document.getElementById(`quantitySelect-${productId}`).value = "1";
         console.log ("productId", productId)
         setFeatureProductId(productId);
 
-        const cartExists = await fetchCartByProductId(token, productId)
-        console.log ("cartExists",cartExists)
+        const cart = await fetchCartByProductId(token, productId)
+        console.log ("cart",cart)
         
-        if (cartExists.cart === undefined){
+        if (!cart.id){
         const result = await addToCart(token, productId, quantity);
         console.log ("addtocart result", result)
-
         setItemsInCart(itemsInCart+quantity)
+        setQuantity(1)
         }
-        else if (cartExists){
-            const result = await editCart(token, productId, itemsInCart + quantity);
-            console.log ("editCart result", result)
+        else {
+            const editedCart = await editCart(token, cart.id, itemsInCart+quantity);
+            console.log ("editCart result", editedCart)
             setItemsInCart(itemsInCart+quantity)
+            setQuantity(1)
         }
+        
         }
 
    
@@ -59,7 +62,7 @@ const categoryProducts = allProducts.filter((product)=>{ return product.category
                                 <button className="ui button" onClick={() => {handleAddToCart(product.id)}} >add to cart</button>
                                 <span>
                                 <div>Qty</div>
-                                <select className="ui dropdown" 
+                                <select className="ui dropdown" id = {`quantitySelect-${product.id}`}
                                 onChange={e => {
                                     const selectedValue = e.target.value;
                                     console.log("selectedValue", selectedValue)

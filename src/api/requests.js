@@ -207,25 +207,15 @@ export const apiCall = async (endpoint, defaultOptions = {}) => {
 
       export const fetchCartByProductId = async (token, productId) => {
 
-        const {cart, message, error} = await apiCall(`cart/${productId}`, {token: token, method: "GET"});
+        const results = await apiCall(`cart/${productId}`, {token: token, method: "GET"});
         
-        if (!error) {
-         console.log (message, cart)
-          return {
-            error: null,
-            token: null,
-            message: message,
-            cart: cart
-          }
+        if (results) {
+         console.log (results)
+          return results
         } else {
           alert("Something isn't right with fetchCartByProductId request");
           console.log("no success in fetchCartByProductId request", error);
-          return {
-            error: error.message,
-            token: null,
-            message: null,
-            cart: null
-          }
+          
         }
       
       }
