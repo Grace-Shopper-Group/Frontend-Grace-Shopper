@@ -55,7 +55,8 @@ const App = () => {
         <div id="main-section">
 
           <Route path="/" exact><Home allProducts={allProducts} setCategory={setCategory}></Home></Route>
-          <Route path="/products"><Products allProducts={allProducts} user={user} token={token}></Products></Route>
+          <Route path="/products"><Products allProducts={allProducts} user={user} token={token}
+            itemsInCart = {itemsInCart} setItemsInCart = {setItemsInCart} setFeatureProductId = {setFeatureProductId}></Products></Route>
           <Route path="/login"><Login setToken={setToken} ></Login></Route>
           <Route path="/register"><Register setToken={setToken}></Register></Route>
           {/* <Route path = "/register"><Logout></Logout></Route> */}
