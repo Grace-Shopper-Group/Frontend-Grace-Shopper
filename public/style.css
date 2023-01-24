@@ -242,3 +242,12 @@ align-items: center;
   text-decoration: line-through;
 }
 
+
+#nav-bar{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-around;
+  padding: 50 px;
+}
+

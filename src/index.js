@@ -15,6 +15,9 @@ const App = () => {
   const [category, setCategory] = useState("athletic");
   const [featureProductId, setFeatureProductId] = useState();
   const [isAdmin, setIsAdmin] = useState(false)
+  const [itemsInCart, setItemsInCart] = useState (0)
+
+  console.log ("itemsInCart", itemsInCart)
 
   const logOut = () => {
     setToken(null);
@@ -35,30 +38,35 @@ const App = () => {
   }, []);
 
   return (
-
+   
     <BrowserRouter>
 
       <div id="container">
-        <div className="nav-bar-title">Sole Quest</div>
+        <div id="nav-bar-title">Sole Quest</div>
         <div id="nav-bar">
           <Link id="Home" to="/">  <img src="https://img.freepik.com/premium-vector/shoes-logo-template-design-vector_316488-1463.jpg?w=1060" /></Link>
           <Link id="Products" to="/products">Products</Link>
           <Link id="Admin" to="/admindash">Admin</Link>
           {!token ? <Link id="Login" to="/login">Login</Link> : <Link id="Logout" to="/" onClick={logOut}>Logout</Link>}
           {!token ? <Link id="Register" to="/register">Register</Link> : null}
+          {itemsInCart ? <Link className="shopping cart icon" to="/checkout">{itemsInCart} <i className="shopping cart icon"></i></Link>:null}
+         
         </div>
         <div id="main-section">
 
           <Route path="/" exact><Home allProducts={allProducts} setCategory={setCategory}></Home></Route>
-          <Route path="/products"><Products allProducts={allProducts} user={user} token={token}></Products></Route>
+          <Route path="/products"><Products allProducts={allProducts} user={user} token={token}
+            itemsInCart = {itemsInCart} setItemsInCart = {setItemsInCart} setFeatureProductId = {setFeatureProductId}></Products></Route>
           <Route path="/login"><Login setToken={setToken} ></Login></Route>
           <Route path="/register"><Register setToken={setToken}></Register></Route>
           {/* <Route path = "/register"><Logout></Logout></Route> */}
           <Route path="/admindash"> <Admindash token={token} allProducts={allProducts} isAdmin={isAdmin} setIsAdmin={setIsAdmin}></Admindash></Route>
           <Route path="/category"> <Category token={token} user={user} category={category}
-            setCategory={setCategory} allProducts={allProducts} setFeatureProductId={setFeatureProductId}></Category></Route>
+            setCategory={setCategory} allProducts={allProducts} setFeatureProductId={setFeatureProductId}
+            itemsInCart = {itemsInCart} setItemsInCart = {setItemsInCart}></Category></Route>
           <Route path="/feature"> <Feature token={token} user={user} featureProductId={featureProductId}
-            setFeatureProductId={setFeatureProductId} allProducts={allProducts}></Feature></Route>
+            setFeatureProductId={setFeatureProductId} allProducts={allProducts} itemsInCart = {itemsInCart} 
+            setItemsInCart = {setItemsInCart}></Feature></Route>
         </div>
       </div>
     </BrowserRouter>

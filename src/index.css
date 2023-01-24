@@ -1,3 +1,13 @@
+#nav-bar-title{
+height: 40px;
+margin-top: 30px;
+margin-left: 60px;
+font-size: 3em;
+font-family: cursive;
+letter-spacing: 10px;
+font-weight:bolder;
+}
+
 #nav-bar {
     background: linear-gradient(90deg,
             rgb(255, 255, 255) 0%,
@@ -5,6 +15,7 @@
     height: 6rem;
     display: flex;
     justify-content: center;
+    justify-content: space-around;
     align-items: center;
     font-size: 1.2rem;
     position: sticky;
