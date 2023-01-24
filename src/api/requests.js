@@ -180,11 +180,12 @@ export const apiCall = async (endpoint, defaultOptions = {}) => {
         }
       }}
 
-      export const addToCart = async (token, userId, productId, quantity) => {
-        const {cart, message, token, error} = await apiCall('cart', {token: token, method: "POST", body: {userId: userId, productId: productId, quantity: quantity}});
+      export const addToCart = async (token, productId, quantity) => {
+
+        const {cart, message, error} = await apiCall('cart', {token: token, method: "POST", body: {productId: productId, quantity: quantity}});
         
         if (!error) {
-         console.log (message, product)
+         console.log ("message, cart",message, cart)
           return {
             error: null,
             token: null,
@@ -194,6 +195,56 @@ export const apiCall = async (endpoint, defaultOptions = {}) => {
         } else {
           alert("Something isn't right with addToCart request");
           console.log("no success in addToCart", error);
+          return {
+            error: error.message,
+            token: null,
+            message: null,
+            cart: null
+          }
+        }
+      
+      }
+
+      export const fetchCartByProductId = async (token, productId) => {
+
+        const {cart, message, error} = await apiCall(`cart/${productId}`, {token: token, method: "GET"});
+        
+        if (!error) {
+         console.log (message, cart)
+          return {
+            error: null,
+            token: null,
+            message: message,
+            cart: cart
+          }
+        } else {
+          alert("Something isn't right with fetchCartByProductId request");
+          console.log("no success in fetchCartByProductId request", error);
+          return {
+            error: error.message,
+            token: null,
+            message: null,
+            cart: null
+          }
+        }
+      
+      }
+
+      export const editCart = async (token, cartId, quantity) => {
+
+        const {cart, message, error} = await apiCall(`cart/${cartId}`, {token: token, method: "PATCH", body: {quantity: quantity}});
+        
+        if (!error) {
+         console.log (message, cart)
+          return {
+            error: null,
+            token: null,
+            message: message,
+            cart: cart
+          }
+        } else {
+          alert("Something isn't right with editCart request");
+          console.log("no success in editCart", error);
           return {
             error: error.message,
             token: null,
