@@ -4,7 +4,7 @@ import {addToCart, fetchCartByProductId, editCart} from "../api/requests"
 
 const Category = (props) => {
     const { user, token, allProducts, category, setFeatureProductId, featureProductId,
-    itemsInCart, setItemsInCart} = props
+    itemsInCart, setItemsInCart } = props
     const [quantity, setQuantity] = useState(1)
     const history = useHistory()
    
@@ -20,6 +20,7 @@ const Category = (props) => {
     async function handleAddToCart(productId) {
         document.getElementById(`quantitySelect-${productId}`).value = "1";
         console.log ("productId", productId)
+
         setFeatureProductId(productId);
 
         const cart = await fetchCartByProductId(token, productId)

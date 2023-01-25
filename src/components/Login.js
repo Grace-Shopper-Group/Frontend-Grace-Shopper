@@ -6,7 +6,7 @@ import Loginwelcome from './Loginwelcome';
 
 
 const Login = (props) => {
-    const { setToken } = props
+    const { setToken, setUser } = props
    
     const [loginUsername, setLoginUsername] = useState("");
     const [loginPassword, setLoginPassword] = useState("");
@@ -20,11 +20,12 @@ const Login = (props) => {
         // console.log("onSubmitHandler() in Login called");
          event.preventDefault();
          console.log("hello")
-         const {error, token, message} = await logInUser(loginUsername, loginPassword);
-         console.log("token",token, message)
-         setToken(token);
-         window.localStorage.setItem('token', token);
-         if (token) {
+         const results = await logInUser(loginUsername, loginPassword);
+         console.log("login results", results)
+         setUser(results.user)
+         setToken(results.token);
+         window.localStorage.setItem('token', results.token);
+         if (results.token) {
             handleLogin()
          }
          else {alert(` Incorrect username or password` )}

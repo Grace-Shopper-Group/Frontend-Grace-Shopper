@@ -11,4 +11,4 @@ export {default as DeleteProduct} from "./DeleteProduct";
 export {default as Loginwelcome} from "./Loginwelcome";
 export {default as Registerwelcome} from "./Registerwelcome";
 // export {default as Profile} from "./Profile";
-// export {default as Cart} from "./Cart";
+export {default as Cart} from "./Cart";
