@@ -258,4 +258,19 @@
   width: 100%;
   justify-content: space-around;
   padding: 50 px;
+
 }
+
+.cart-content-outer{
+  height: 300px;
+  width: 700px;
+ 
+}
+
+.cart-content-inner{
+  display:flex;
+  flex-direction: column;
+  width: 500px;
+ 
+}
+
