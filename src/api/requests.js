@@ -246,8 +246,9 @@ export const apiCall = async (endpoint, defaultOptions = {}) => {
       }
 
       export const fetchCartByUserId = async (token, userId) => {
+        console.log ("token, userId fetchCartByUserId", token, userId)
 
-        const results = await apiCall(`${userId/cart}`, {token: token, method: "GET"});
+        const results = await apiCall(`cart/${userId}/cart`, {token: token, method: "GET"});
         
         if (results) {
          console.log (results)

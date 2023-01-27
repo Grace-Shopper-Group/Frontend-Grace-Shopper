@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom/client';
-import { BrowserRouter, Route, Switch, Link } from 'react-router-dom';
+import { BrowserRouter, Route, Switch, Link} from 'react-router-dom';
 import { Login, Register, Home, Products, Category, Admindash, Feature, Cart } from './components/Index';
-import { fetchProducts } from './api/requests.js';
+import { fetchProducts, fetchCartByUserId } from './api/requests.js';
 import "./index.css"
 
 const App = () => {
@@ -16,6 +16,7 @@ const App = () => {
   const [featureProductId, setFeatureProductId] = useState();
   const [isAdmin, setIsAdmin] = useState(false)
   const [itemsInCart, setItemsInCart] = useState (0)
+  const [allUserCarts, setAllUserCarts] = useState()
  
 
   console.log ("itemsInCart", itemsInCart, "token", token)
@@ -40,6 +41,8 @@ const App = () => {
 
   }, []);
 
+ 
+
   return (
    
     <BrowserRouter>
@@ -52,7 +55,8 @@ const App = () => {
           <Link id="Admin" to="/admindash">Admin</Link>
           {!token ? <Link id="Login" to="/login">Login</Link> : <Link id="Logout" to="/" onClick={logOut}>Logout</Link>}
           {!token ? <Link id="Register" to="/register">Register</Link> : null}
-          {itemsInCart ? <Link className="shopping cart icon" to="/cart">{itemsInCart} <i className="shopping cart icon"></i></Link>:null}
+          <Link to="/cart"><button className="shopping cart icon" to="/cart">{itemsInCart} <i className="shopping cart icon"></i></button> </Link>
+          {/* {token ? <Link to="/cart"><button className="shopping cart icon" to="/cart">{itemsInCart} <i className="shopping cart icon"></i></button> </Link>:null} */}
          
         </div>
         <div id="main-section">
@@ -66,13 +70,13 @@ const App = () => {
           <Route path="/admindash"> <Admindash token={token} allProducts={allProducts} isAdmin={isAdmin} setIsAdmin={setIsAdmin}></Admindash></Route>
           <Route path="/category"> <Category token={token} user={user} category={category}
             setCategory={setCategory} allProducts={allProducts} setFeatureProductId={setFeatureProductId}
-            itemsInCart = {itemsInCart} setItemsInCart = {setItemsInCart}></Category></Route>
+            itemsInCart = {itemsInCart} setItemsInCart = {setItemsInCart} setAllUserCarts={setAllUserCarts}></Category></Route>
           <Route path="/feature"> <Feature token={token} user={user} featureProductId={featureProductId}
             setFeatureProductId={setFeatureProductId} allProducts={allProducts} itemsInCart = {itemsInCart} 
             setItemsInCart = {setItemsInCart}></Feature></Route>
           <Route path="/cart"> <Cart token={token} user={user} featureProductId={featureProductId}
             setFeatureProductId={setFeatureProductId} allProducts={allProducts} itemsInCart = {itemsInCart} 
-            setItemsInCart = {setItemsInCart} user = {user}></Cart></Route>
+            setItemsInCart = {setItemsInCart} allUserCarts = {allUserCarts}></Cart></Route>
         </div>
       </div>
     </BrowserRouter>

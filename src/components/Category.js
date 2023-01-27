@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-import {addToCart, fetchCartByProductId, editCart} from "../api/requests"
+import {addToCart, fetchCartByProductId, editCart, fetchCartByUserId} from "../api/requests"
 
 const Category = (props) => {
     const { user, token, allProducts, category, setFeatureProductId, featureProductId,
-    itemsInCart, setItemsInCart } = props
+    itemsInCart, setItemsInCart, setAllUserCarts } = props
     const [quantity, setQuantity] = useState(1)
     const history = useHistory()
    
@@ -31,12 +31,22 @@ const Category = (props) => {
         console.log ("addtocart result", result)
         setItemsInCart(itemsInCart+quantity)
         setQuantity(1)
+        const userCarts = await fetchCartByUserId(token, user.id);
+        for (let userCart of userCarts){
+            const addProduct = allProducts.filter((product) => userCart.productId === product.id);
+            userCart.product = addProduct;} 
+           setAllUserCarts(userCarts)
         }
         else {
             const editedCart = await editCart(token, cart.id, itemsInCart+quantity);
             console.log ("editCart result", editedCart)
             setItemsInCart(itemsInCart+quantity)
             setQuantity(1)
+            const userCarts = await fetchCartByUserId(token, user.id);
+            for (let userCart of userCarts){
+                const addProduct = allProducts.filter((product) => userCart.productId === product.id);
+                userCart.product = addProduct;} 
+               setAllUserCarts(userCarts)
         }
         
         }
