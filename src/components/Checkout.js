@@ -1,8 +1,8 @@
 import React from 'react'
 import axios from 'axios'
 import StripeCheckout from 'react-stripe-checkout'
-
-
+import {useHistory} from 'react-router-dom'
+const history = useHistory()
 const CURRENCY = 'USD'
 
 const successPayment = data => {
