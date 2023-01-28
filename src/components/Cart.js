@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import {addToCart, fetchCartByUserId, editCart, fetchCartByProductId} from "../api/requests"
+import Checkout from "./Checkout.js"
 
 const Cart = (props) => {
     const { user, token, allProducts, category, setFeatureProductId, featureProductId,
@@ -8,6 +9,7 @@ const Cart = (props) => {
     const [quantity, setQuantity] = useState(0)
     const [grandTotal, setGrandTotal] = useState(0)
     const [userCarts, setUserCarts] = useState(allUserCarts)
+    const [clickedCheckout, setClickedCheckout] = useState(false)
     const history = useHistory()
   
 
@@ -86,8 +88,10 @@ console.log("userCarts", userCarts)
         
       
         <div className="category-products">
-           <div id="checkout-total"><div id="checkout-total-container"> <button className="ui button" id="checkout-button"> Checkout </button><div id="grand-total">Grand Total&nbsp;{grandTotal}</div></div> </div>
-           
+           <div id="checkout-total"><div id="checkout-total-container"> 
+           <button className="ui button" id="checkout-button" onClick= {()=>{setClickedCheckout(true)}}> Checkout </button>
+           <div id="grand-total">Grand Total&nbsp;{grandTotal}</div></div> </div>
+           <div>{clickedCheckout && <Checkout setClickedCheckout = {setClickedCheckout} grandTotal= {grandTotal} user = {user} token ={token}/>}</div>
             <div className="cart-products">
            
                 {userCarts.map((cart) => {

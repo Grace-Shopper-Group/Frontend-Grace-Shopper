@@ -56,34 +56,18 @@ export const apiCall = async (endpoint, defaultOptions = {}) => {
 
 
   export const registerUser = async (username, password) => {
-    console.log ("registerUser", name, password)
+    console.log ("registerUser", username, password)
     try {
-      const {user, message, token, error} = await apiCall('users/register', {token: null, method: "POST", body: { username: username,
+      const results = await apiCall('users/register', {token: null, method: "POST", body: { username: username,
       password: password}} );
-      if (!error) {
-   
-        return {
-          error: null,
-          token: token,
-          message: message,
-          user: user
-        }
+      if (results) {
+        return results
       } else {
-        console.log("no success in registerUser()", error);
-        return {
-          error: error.message,
-          token: null,
-          message: null
-        }
+        console.log("no success in registerUser()");
+        
       }
     } catch (error){
-      console(error);
-      return {
-        error: result,
-        token: null,
-        message: null,
-        user: null
-      }
+      console.error(error);
     }
   }
 
@@ -106,6 +90,29 @@ export const apiCall = async (endpoint, defaultOptions = {}) => {
         return {
           error: error.message,
           token: null,
+          message: null,
+          user: null
+        }
+      }
+    
+    }
+
+    export const editUser = async (tokenString, userId, iscustomer, firstname, lastname, streetAddress, city, state, zip, phone, email) => {
+     
+      const result = await apiCall((`users/${userId}`), {token: tokenString, method: "PATCH", 
+      body: {iscustomer: iscustomer, firstname: firstname, lastname: lastname, streetAddress: streetAddress, city: city, state: state, zip:zip, phone:phone, email:email}} );
+      console.log("result", result)
+      if (!result.error) {
+       console.log (result.message, result.user)
+        return {
+          error: null,
+          user: result.user
+        }
+      } else {
+        alert("Something isn't right");
+        console.log("no success in editUser", error);
+        return {
+          error: error.message,
           message: null,
           user: null
         }
