@@ -13,4 +13,5 @@ export {default as Loginwelcome} from "./Loginwelcome";
 export {default as Registerwelcome} from "./Registerwelcome";
 export {default as Cart} from "./Cart";
 export {default as Checkout} from "./Checkout"
+export {default as Pleaselogin} from "./Pleaselogin"
 // export {default as Profile} from "./Profile";

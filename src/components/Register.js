@@ -39,7 +39,7 @@ const Register = (props) => {
 
     
     return (<><form className="ui form" onSubmit={onSubmitHandler}>
-        <h1>SignUp Form</h1>
+        <h1>Register</h1>
         <div className="field">
             <label>Username</label>
             <input
