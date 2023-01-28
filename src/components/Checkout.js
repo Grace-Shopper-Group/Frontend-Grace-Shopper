@@ -1,35 +1,14 @@
 import React, { useState } from 'react'
-import axios from 'axios'
-import StripeCheckout from 'react-stripe-checkout'
 import {useHistory} from 'react-router-dom'
 import {editUser} from "../api/requests"
+import ConfirmCheckout from "./ConfirmCheckout.js"
 
 // const history = useHistory()
-const CURRENCY = 'USD'
 
-const successPayment = data => {
-    alert('Payment Successful')
-    // history.push('/thankyou')
-}
-const errorPayment = data => {
-    alert(data)
-}
-const onToken = (amount, description, handleCheckoutSuccess) => async token => {
-    try {
-        const { data } = await axios.post('/api/stripe/checkout', {
-            description,
-            source: token.id,
-            currency: CURRENCY,
-            amount
-        })
-        successPayment(data)
-        handleCheckoutSuccess()
-    } catch (error) {
-        errorPayment(error)
-    }
-}
 
-const Checkout = ({ name, description, amount, handleCheckoutSuccess, token, user }) => {
+const Checkout = ({ token, user, setClickedCheckout, grandTotal, setItemsInCart}) => {
+
+console.log("grandTotal", grandTotal)
 
 const [guest, setGuest] = useState()
 const [firstname, setFirstName] = useState()
@@ -40,7 +19,8 @@ const [state, setState] = useState()
 const [zip, setZip] = useState()
 const [phone, setPhone] = useState()
 const [email, setEmail] = useState()
-const [iscustomer, setIsCustomer]=useState (false)
+const [iscustomer, setIsCustomer]=useState (false);
+const [clickedSubmit, setClickedSubmit]=useState(false);
 
 const history= useHistory()
 
@@ -51,13 +31,15 @@ const history= useHistory()
         console.log("iscustomer", iscustomer)
         const results = await editUser(token, user.id, iscustomer, firstname, lastname, streetAddress, city, state, zip, phone, email);
         console.log("edituser results", results)
-        setClickedCheckout(false)
-        history.push('/category')
+        // setClickedCheckout(false)
+        setClickedSubmit(true)
+        // history.push('/category')
        }
 
     return (<>
-        <div id="ui form">
-        <div id="ui form">
+        <div id="checkout-form">
+        <div id="checkout-form-container">
+       
         <form className="ui form" onSubmit={handleUserSubmit}>
             <h1>Checkout</h1>
             
@@ -151,17 +133,10 @@ const history= useHistory()
             </div>
         </form>
         </div>
-        <div>
-            <StripeCheckout
-                name={name}
-                description={description}
-                amount={amount}
-                token={onToken(amount, description, handleCheckoutSuccess)}
-                currency={CURRENCY}
-                stripeKey="pk_test_TYooMQauvdEDq54NiTphI7jx"
-                label="Pay with 💳"
-            />
-        </div>
+        <div>{clickedSubmit && <ConfirmCheckout setClickedSubmit = {setClickedSubmit} grandTotal= {grandTotal} user = {user}
+        firstname={firstname} lastname={lastname} streetAddress= {streetAddress} city={city} state={state} zip={zip} 
+        phone={phone} email= {email} setItemsInCart={setItemsInCart}/>}</div>
+        
         </div>
         </>
     )

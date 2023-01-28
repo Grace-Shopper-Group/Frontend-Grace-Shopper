@@ -31,7 +31,7 @@ const App = () => {
   };
 
   useEffect(() => {
-    setToken("")
+    // setToken("")
     const getAllProducts = async () => {
       try {
         const products = await fetchProducts();
@@ -59,7 +59,7 @@ const App = () => {
           {!token ? <Link id="Login" to="/login">Login</Link> : <Link id="Logout" to="/" onClick={logOut}>Logout</Link>}
           {!token ? <Link id="Register" to="/register">Register</Link> : null}
           
-          <Link to="/cart"><span>{(itemsInCart>0)?itemsInCart:null}<img className="ui mini image" src="http://cdn.onlinewebfonts.com/svg/img_61350.png"></img></span></Link>
+          {itemsInCart? <Link to="/cart"><i className="shopping cart icon"></i>{itemsInCart}</Link>:null}
           <Link id="Admin" to="/admindash"><img className='ui mini image' src='https://cdn-icons-png.flaticon.com/512/1/1760.png'></img></Link>
 
 
