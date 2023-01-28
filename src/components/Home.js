@@ -19,36 +19,34 @@ const Home = (props) => {
     
    
     return (<> 
-    <div id="home-category-title"> Shop By Category </div>
+    <div id="homeimagediv">
+   <img className='ui fluid image' src={`${process.env.PUBLIC_URL}/images/homepic2.jpg`} />
+   </div>
+
+    <h1 id="centertitle" className="ui blue header">Shop By Category</h1>
     <div id="home-category-container">
     <div className="home-category-box">
         <div className="home-category-title" onClick={() => clickedCategory("athletic")}>Athletic</div> 
         <div className="home-category-imagediv" onClick={() => clickedCategory("athletic")}>
-   <img className="home-category-image" src="https://www.famousfootwear.com/blob/product-images/20000/96/01/9/96019_pair_medium.jpg" />
-   <img className="home-category-image" src="https://www.famousfootwear.com/blob/product-images/20000/98/76/6/98766_pair_medium.jpg" />
+   <img className="ui small image" src="https://static.nike.com/a/images/t_default/8c574656-8659-4712-a77e-50421e7e4a68/pegasus-trail-4-gore-tex-mens-waterproof-trail-running-shoes-qdcSR6.png" />
    </div>
 
     </div>
     <div className="home-category-box">
         <div className="home-category-title" onClick={() => clickedCategory("casual")}>Casual</div>
         <div className="home-category-imagediv" onClick={() => clickedCategory("casual")}>
-   <img className="home-category-image" src="https://www.famousfootwear.com/blob/product-images/20000/95/91/3/95913_pair_medium.jpg" />
-   <img className="home-category-image" src="https://www.famousfootwear.com/blob/product-images/20000/97/16/8/97168_pair_medium.jpg" />
+   <img className="ui small image" src="https://static.vecteezy.com/system/resources/previews/010/986/202/non_2x/white-sports-sneakers-cut-out-png.png" />
    </div>
 
     </div>
     <div className="home-category-box">
         <div className="home-category-title" onClick={() => clickedCategory("dress")}>Dress</div>
         <div className="home-category-imagediv" onClick={() => clickedCategory("dress")}>
-   <img className="home-category-image" src="https://www.famousfootwear.com/blob/product-images/20000/97/02/2/97022_pair_medium.jpg" />
-   <img className="home-category-image" src="https://www.famousfootwear.com/blob/product-images/20000/70/46/8/70468_pair_medium.jpg" />
+   <img className="ui small image" src="https://freepngimg.com/thumb/shoes/24652-8-shoes-clipart.png" />
    </div>
-
     </div>
     </div>
-   <div id="homeimagediv">
-   <img id="homeimage" src={`${process.env.PUBLIC_URL}/images/homepic2.jpg`} />
-   </div>
+  
 
    <div id="home-footer-background1"></div>
    <div id="home-footer-background2"></div>

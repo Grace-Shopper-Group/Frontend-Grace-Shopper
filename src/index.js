@@ -51,18 +51,15 @@ const App = () => {
 
     <BrowserRouter>
 
-      <div id="container">
-        <div id="nav-bar-title">Sole Quest</div>
+      <div id="navcontainer">
+        {/* <div className='namelogo'><img className='name' src={`${process.env.PUBLIC_URL}/images/namelogo.png`}></img></div> */}
         <div id="nav-bar">
-          <Link id="Home" to="/">  <img src="https://img.freepik.com/premium-vector/shoes-logo-template-design-vector_316488-1463.jpg?w=1060" /></Link>
+          <Link id="Home" to="/">  <img className='logo' src={`${process.env.PUBLIC_URL}/images/logo.png`} /></Link>
           <Link id="Products" to="/products">Products</Link>
-          <Link id="Admin" to="/admindash">Admin</Link>
           {!token ? <Link id="Login" to="/login">Login</Link> : <Link id="Logout" to="/" onClick={logOut}>Logout</Link>}
           {!token ? <Link id="Register" to="/register">Register</Link> : null}
-
-          <Link to="/cart"><button className="shopping cart icon" to="/cart">{itemsInCart} <i className="shopping cart icon"></i></button> </Link>
-          {/* {token ? <Link to="/cart"><button className="shopping cart icon" to="/cart">{itemsInCart} <i className="shopping cart icon"></i></button> </Link>:null} */}
-         
+          <Link to="/cart"><span>{(itemsInCart>0)?itemsInCart:null}<img className="ui mini image" src="http://cdn.onlinewebfonts.com/svg/img_61350.png"></img></span></Link>
+          <Link id="Admin" to="/admindash"><img className='ui mini image' src='https://cdn-icons-png.flaticon.com/512/1/1760.png'></img></Link>
 
         </div>
         <div id="main-section">
