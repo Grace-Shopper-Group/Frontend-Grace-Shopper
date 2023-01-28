@@ -46,6 +46,7 @@ const Login = (props) => {
     return (<>
         <form className="ui form" onSubmit={otherOnSubmitHandler}>
             <h1>Login Form</h1>
+            <h4>Not Registered Yet?&nbsp;&nbsp;Click Here &nbsp;&nbsp;<button className="ui button" onClick={()=> history.push("/register")}>  Register</button></h4>
             <div className="field">
                 <label>Username</label>
                 <input

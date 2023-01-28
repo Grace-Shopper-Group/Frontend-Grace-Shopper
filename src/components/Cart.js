@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import {addToCart, fetchCartByUserId, editCart, fetchCartByProductId} from "../api/requests"
+import Checkout from "./Checkout.js"
 
 const Cart = (props) => {
     const { user, token, allProducts, category, setFeatureProductId, featureProductId,
@@ -8,6 +9,7 @@ const Cart = (props) => {
     const [quantity, setQuantity] = useState(0)
     const [grandTotal, setGrandTotal] = useState(0)
     const [userCarts, setUserCarts] = useState(allUserCarts)
+    const [clickedCheckout, setClickedCheckout] = useState(false)
     const history = useHistory()
   
 
@@ -24,12 +26,7 @@ const Cart = (props) => {
       }, [userCarts]);
 
     
-    function handleClick(id) {
-        // console.log ("productId", id)
-        setFeatureProductId(id);
-        history.push('/feature')
-       
-        }
+    
     async function handleAddToCart(productId) {
         document.getElementById(`quantitySelect-${productId}`).value = "1";
         // console.log ("productId", productId)
@@ -91,8 +88,10 @@ console.log("userCarts", userCarts)
         
       
         <div className="category-products">
-           <div> <button className="ui button" id="checkout-button"> Checkout </button><div>Grand Total{grandTotal}</div> </div>
-           
+           <div id="checkout-total"><div id="checkout-total-container"> 
+           <button className="ui button" id="checkout-button" onClick= {()=>{setClickedCheckout(true)}}> Checkout </button>
+           <div id="grand-total">Grand Total&nbsp;{grandTotal}</div></div> </div>
+           <div>{clickedCheckout && <Checkout setClickedCheckout = {setClickedCheckout} grandTotal= {grandTotal} user = {user} token ={token}/>}</div>
             <div className="cart-products">
            
                 {userCarts.map((cart) => {
@@ -103,9 +102,9 @@ console.log("userCarts", userCarts)
                         <div className="ui celled grid">
                             <div className="one wide row">
                             <span className= "product-container">
-                                <h4 className="category-description"  onClick={() => handleClick(cart.product[0].id)}>{cart.product[0].description}</h4>
+                                <h4 className="category-description"  >{cart.product[0].description}</h4>
                                 <h4 className="header">{cart.product[0].brand}</h4>
-                                <img className="category-image" onClick={() => handleClick(cart.product[0].id)} src={cart.product[0].imageUrl}></img>
+                                <img className="category-image"  src={cart.product[0].imageUrl}></img>
                                 
                                 <h3 className="ui green header">${cart.product[0].price}</h3>
                                

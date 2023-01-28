@@ -16,10 +16,11 @@ const Register = (props) => {
     const onSubmitHandler = async (event) => {
         console.log("onSubmitHandler() called");
         event.preventDefault();
-        const {error, token, message, user} = await registerUser(username, password);
-        setToken(token);
-        window.localStorage.setItem('token', token);
-        if(token){
+        const results = await registerUser(username, password);
+        console.log ("results",results)
+        setToken(results.token);
+        window.localStorage.setItem('token', results.token);
+        if(results.token){
         handleRegister()
         }
         else {alert(` The username ${username} is already registered` )}
@@ -39,7 +40,7 @@ const Register = (props) => {
 
     
     return (<><form className="ui form" onSubmit={onSubmitHandler}>
-        <h1>SignUp Form</h1>
+        <h1>Register</h1>
         <div className="field">
             <label>Username</label>
             <input

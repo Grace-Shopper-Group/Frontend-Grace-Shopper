@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-import {addToCart, fetchCartByProductId, editCart} from "../api/requests"
+import {addToCart, fetchCartByProductId, editCart, fetchCartByUserId} from "../api/requests"
+import Pleaselogin from './Pleaselogin.js'
 
 const Feature = (props) => {
     const { user, token, allProducts,featureProductId, setFeatureProductId,
-    itemsInCart, setItemsInCart} = props
+    itemsInCart, setItemsInCart, setAllUserCarts} = props
     const [quantity, setQuantity] = useState(1)
-
+    const [clickedWithoutLogin, setClickedWithoutLogin] = useState(false)
+    const [clickedProductId, setClickedProductId] = useState()
     const history = useHistory()
    
     console.log (allProducts)
@@ -15,10 +17,20 @@ const Feature = (props) => {
     function clickedBack() {
         console.log ("clickedBack")
         setFeatureProductId("")
-        history.push("/category")
+        history.push('/')
     }
 
+    function handleClickPleaseLogin(id) {
+        console.log ("productId", id)
+        setClickedProductId(id);
+        }
+ 
     async function handleAddToCart(productId) {
+        if (!token){
+            setClickedWithoutLogin(true)
+            handleClickPleaseLogin(productId)
+        }
+        else{
         document.getElementById(`quantitySelect-${productId}`).value = "1";
         console.log ("productId", productId)
         setFeatureProductId(productId);
@@ -31,15 +43,29 @@ const Feature = (props) => {
         console.log ("addtocart result", result)
         setItemsInCart(itemsInCart+quantity)
         setQuantity(1)
+        const userCarts = await fetchCartByUserId(token, user.id);
+        for (let userCart of userCarts){
+            const addProduct = allProducts.filter((product) => userCart.productId === product.id);
+            userCart.product = addProduct;} 
+            setAllUserCarts(userCarts)
+       
         }
         else {
             const editedCart = await editCart(token, cart.id, itemsInCart+quantity);
             console.log ("editCart result", editedCart)
             setItemsInCart(itemsInCart+quantity)
             setQuantity(1)
-        }
+            const userCarts = await fetchCartByUserId(token, user.id);
+            for (let userCart of userCarts){
+                const addProduct = allProducts.filter((product) => userCart.productId === product.id);
+                userCart.product = addProduct;} 
+                setAllUserCarts(userCarts)
         
         }
+        }
+        }
+       
+
 
 const featureProduct = allProducts.filter((product)=>{ return product.id === featureProductId})
     
@@ -57,6 +83,7 @@ const featureProduct = allProducts.filter((product)=>{ return product.id === fea
                                 <img className="feature-image" src={featureProduct[0].imageUrl}></img>
                                 <h3>Price: ${featureProduct[0].price}</h3>
                                 <button className="ui button" onClick={() => {handleAddToCart(featureProduct[0].id)}} >add to cart</button>
+                                <div className= "pleaselogin"> {clickedProductId === featureProduct[0].id && clickedWithoutLogin && <Pleaselogin/>} </div>
                                 <button className="ui button" onClick={() => {clickedBack()}}>Back</button>
                                 <span>
                                 <div>Qty</div>

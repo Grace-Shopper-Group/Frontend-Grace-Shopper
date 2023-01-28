@@ -115,3 +115,23 @@ img {
     margin-left:70px;
 
 }
+.pleaselogin{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width:400 px;
+    margin-top: 5px;
+    border: 1px solid black;
+    border-radius: 3px;
+ }
+
+ #checkout-total{
+    display:flex;
+    flex-direction:column;
+    justify-content:right;
+    align-items:flex-end;
+    margin-right:30px;
+  }
+
+  

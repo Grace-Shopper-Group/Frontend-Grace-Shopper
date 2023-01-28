@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom/client';
 
 import { BrowserRouter, Route, Switch, Link} from 'react-router-dom';
-import { Login, Register, Home, Products, Category, Admindash, Feature, Cart } from './components/Index';
+import { Login, Register, Home, Products, Category, Admindash, Feature, Cart, Checkout} from './components/Index';
 import { fetchProducts, fetchCartByUserId } from './api/requests.js';
 
 import "./index.css"
@@ -70,7 +70,8 @@ const App = () => {
           <Route path="/" exact><Home allProducts={allProducts} setCategory={setCategory}></Home></Route>
           <Route path="/products"><Products allProducts={allProducts} user={user} token={token}
 
-            itemsInCart = {itemsInCart} setItemsInCart = {setItemsInCart} setFeatureProductId = {setFeatureProductId}></Products></Route>
+            itemsInCart = {itemsInCart} setItemsInCart = {setItemsInCart} setFeatureProductId = {setFeatureProductId} 
+            setAllUserCarts={setAllUserCarts}></Products></Route>
           <Route path="/login"><Login setToken={setToken} setUser={setUser} ></Login></Route>
 
           <Route path="/register"><Register setToken={setToken}></Register></Route>
@@ -81,7 +82,7 @@ const App = () => {
             itemsInCart = {itemsInCart} setItemsInCart = {setItemsInCart} setAllUserCarts={setAllUserCarts}></Category></Route>
           <Route path="/feature"> <Feature token={token} user={user} featureProductId={featureProductId}
             setFeatureProductId={setFeatureProductId} allProducts={allProducts} itemsInCart = {itemsInCart} 
-            setItemsInCart = {setItemsInCart}></Feature></Route>
+            setItemsInCart = {setItemsInCart} setAllUserCarts={setAllUserCarts}></Feature></Route>
           <Route path="/cart"> <Cart token={token} user={user} featureProductId={featureProductId}
             setFeatureProductId={setFeatureProductId} allProducts={allProducts} itemsInCart = {itemsInCart} 
             setItemsInCart = {setItemsInCart} allUserCarts = {allUserCarts}></Cart></Route>
