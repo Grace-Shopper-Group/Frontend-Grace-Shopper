@@ -6,12 +6,14 @@ font-size: 3em;
 font-family: cursive;
 letter-spacing: 10px;
 font-weight:bolder;
+text-align: center;
 }
 
 #nav-bar {
     background: linear-gradient(90deg,
             rgb(255, 255, 255) 0%,
-            rgb(255, 255, 255) 100%);
+            rgb(206, 198, 163) 100%);
+    /* background-color: rgb(204, 225, 242); */
     height: 6rem;
     display: flex;
     justify-content: center;
@@ -133,5 +135,3 @@ img {
     align-items:flex-end;
     margin-right:30px;
   }
-
-  
