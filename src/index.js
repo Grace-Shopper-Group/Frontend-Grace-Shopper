@@ -58,8 +58,10 @@ const App = () => {
           <Link id="Products" to="/products">Products</Link>
           {!token ? <Link id="Login" to="/login">Login</Link> : <Link id="Logout" to="/" onClick={logOut}>Logout</Link>}
           {!token ? <Link id="Register" to="/register">Register</Link> : null}
+          
           <Link to="/cart"><span>{(itemsInCart>0)?itemsInCart:null}<img className="ui mini image" src="http://cdn.onlinewebfonts.com/svg/img_61350.png"></img></span></Link>
           <Link id="Admin" to="/admindash"><img className='ui mini image' src='https://cdn-icons-png.flaticon.com/512/1/1760.png'></img></Link>
+
 
         </div>
         <div id="main-section">
