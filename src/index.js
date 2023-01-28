@@ -60,7 +60,7 @@ const App = () => {
           {!token ? <Link id="Login" to="/login">Login</Link> : <Link id="Logout" to="/" onClick={logOut}>Logout</Link>}
           {!token ? <Link id="Register" to="/register">Register</Link> : null}
 
-          <Link to="/cart"><button className="shopping cart icon" to="/cart">{itemsInCart} <i className="shopping cart icon"></i></button> </Link>
+          {itemsInCart? <Link to="/cart"><button className="shopping cart icon" to="/cart">{itemsInCart} <i className="shopping cart icon"></i></button> </Link>:null}
           {/* {token ? <Link to="/cart"><button className="shopping cart icon" to="/cart">{itemsInCart} <i className="shopping cart icon"></i></button> </Link>:null} */}
          
 
