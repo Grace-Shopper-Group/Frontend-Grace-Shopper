@@ -31,7 +31,6 @@ const App = () => {
   };
 
   useEffect(() => {
-    setToken("")
     const getAllProducts = async () => {
       try {
         const products = await fetchProducts();
