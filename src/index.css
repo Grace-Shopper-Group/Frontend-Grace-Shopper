@@ -135,3 +135,40 @@ img {
     align-items:flex-end;
     margin-right:30px;
   }
+
+  [className='shopping cart icon']{
+ color: black;
+ font-size: x-large;
+  }
+
+  #checkout-form-container{
+    display:flex;
+    flex-direction: column;
+    margin-left: 300px;
+    justify-content: center;
+    width: 600px;
+  }
+
+  .confirm-checkout{
+    display:flex;
+    font-size: x-large;
+    flex-direction: column;
+    margin-left: 300px;
+    justify-content: center;
+    justify-content: space-between;
+    width: 600px;
+    border:3px solid black;
+    padding: 20px;
+    height: 400px;
+  }
+
+  .confirm-checkout-card{
+    display:flex;
+    font-size: large;
+    flex-direction: column;
+    justify-content: center;
+    align-items:stretch;
+    width: 500px;
+    padding: 20px;
+    height: 250px;
+  }
