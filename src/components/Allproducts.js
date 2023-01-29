@@ -94,6 +94,16 @@ const Products = (props) => {
                                     <option value="2">2</option>
                                 </select>
                                 </span>
+                                <div>
+                                Average rating:
+                                <div class="ui star rating" data-rating="5">
+                                    <i class="icon active"></i>
+                                    <i class="icon active"></i>
+                                    <i class="icon active"></i>
+                                    <i class="icon active"></i>
+                                    <i class="icon active"></i>
+                                </div>
+                                </div>
                             </div>
                         </div>
                     );
