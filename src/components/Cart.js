@@ -91,7 +91,8 @@ console.log("userCarts", userCarts)
            <div id="checkout-total"><div id="checkout-total-container"> 
            <button className="ui button" id="checkout-button" onClick= {()=>{setClickedCheckout(true)}}> Checkout </button>
            <div id="grand-total">Grand Total&nbsp;{grandTotal}</div></div> </div>
-           <div>{clickedCheckout && <Checkout setClickedCheckout = {setClickedCheckout} grandTotal= {grandTotal} user = {user} token ={token}/>}</div>
+           <div>{clickedCheckout && <Checkout setClickedCheckout = {setClickedCheckout} grandTotal= {grandTotal} user = {user} token ={token}
+           setItemsInCart = {setItemsInCart}/>}</div>
             <div className="cart-products">
            
                 {userCarts.map((cart) => {
