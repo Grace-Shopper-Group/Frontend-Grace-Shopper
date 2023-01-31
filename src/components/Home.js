@@ -20,10 +20,9 @@ const Home = (props) => {
    
     return (<> 
     <div id="homeimagediv">
-   <img className='ui fluid image' src={`${process.env.PUBLIC_URL}/images/homepic2.jpg`} />
+   <img className='ui fluid image' src={`${process.env.PUBLIC_URL}/images/homepic2.jpg`}/>
    </div>
-
-    <h1 id="centertitle" className="ui blue header">Shop By Category</h1>
+   <h1 id="centertitle" className="ui blue header">Shop By Category</h1>
     <div id="home-category-container">
     <div className="home-category-box">
         <div className="home-category-title" onClick={() => clickedCategory("athletic")}>Athletic</div> 
@@ -46,6 +45,7 @@ const Home = (props) => {
    </div>
     </div>
     </div>
+
   
 
    <div id="home-footer-background1"></div>
