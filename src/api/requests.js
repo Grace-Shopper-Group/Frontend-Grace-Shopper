@@ -1,4 +1,4 @@
-const BASEURL = "http://localhost:1337/api";
+const BASEURL = "https://grace-shopper-8lm0.onrender.com/api";
 
 
 const makeHeaders = (token) => {
