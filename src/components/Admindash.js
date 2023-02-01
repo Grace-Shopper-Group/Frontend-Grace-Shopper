@@ -87,7 +87,7 @@ const handleClear = (e) => {
 const handleClick = async (e) => {
     console.log(newBrand, newDesc, newCategory, newPrice, newImg)
       const newProduct = await createProduct(newBrand, newDesc, newCategory, newPrice, newImg)
-      console.log("newProduct", changedProduct)
+      console.log("newProduct", newProduct)
       handleClear(e)
   }
 
