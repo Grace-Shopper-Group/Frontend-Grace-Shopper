@@ -145,7 +145,7 @@ export const apiCall = async (endpoint, defaultOptions = {}) => {
     }
 
     export const createProduct = async (brand, description, category, price, img) => {
-      const {product, message, token, error} = await apiCall('products', {token: null, method: "Post", body: {brand: brand, description: description, category: category, price: price, img: img}} );
+      const {product, message, token, error} = await apiCall('products', {token: null, method: "Post", body: {brand: brand, description: description, category: category, price: price, imageUrl: img}} );
       
       if (!error) {
        console.log (message, product)
